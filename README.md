@@ -1,34 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task Hub and Utility Station Web Application
 
-## Getting Started
+This is a web application designed to help desktop users, particularly developers and designers, in organizing their schedules, managing to-do lists, staying updated with daily news, checking emails, and utilizing an AI chatbot. The application is built using Next.js with TypeScript, Tailwind, MobX, NextAuth.js, and Firebase.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- **Task Organization**: Easily manage your schedule and tasks using the task hub feature. Add, edit, and delete tasks as needed to stay organized and productive.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **To-Do List**: Never forget important tasks again. Use the built-in to-do list feature to jot down tasks and reminders. Mark completed tasks to keep track of your progress.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Daily News**: Stay informed and up to date with the latest news. The application provides a news feed that fetches and displays current news articles.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Email Integration**: Conveniently check your emails without leaving the application. Connect your email account and receive notifications for new emails. Read, reply, and manage your inbox seamlessly.
 
-## Learn More
+- **AI Chatbot**: Utilize the power of artificial intelligence with the integrated chatbot. Get assistance, ask questions, and receive intelligent responses to enhance your productivity.
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The web application is built using the following technologies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Next.js**: A React framework for building server-side rendered and statically generated web applications.
 
-## Deploy on Vercel
+- **TypeScript**: A statically-typed superset of JavaScript that helps catch errors early and improves code maintainability.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Tailwind**: A utility-first CSS framework that provides a set of ready-to-use components and styling classes for rapid development.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **MobX**: A state management library that helps manage application state with ease, improving reactivity and maintainability.
+
+- **NextAuth.js**: An authentication library for Next.js applications that supports various authentication providers and provides a seamless authentication flow.
+
+- **Firebase**: A cloud-based platform that offers a range of services, including real-time databases, authentication, and hosting. Firebase integration provides a robust and scalable backend for the application.
+
