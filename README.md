@@ -1,4 +1,4 @@
-# Task Hub and Utility Station Web Application
+# Project HUBBY
 
 This is a web application designed to help desktop users, particularly developers and designers, in organizing their schedules, managing to-do lists, staying updated with daily news, checking emails, and utilizing an AI chatbot. The application is built using Next.js with TypeScript, Tailwind, MobX, NextAuth.js, and Firebase.
 
