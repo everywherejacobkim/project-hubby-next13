@@ -24,7 +24,7 @@ The web application is built using the following technologies:
 
 - **Tailwind**: A utility-first CSS framework that provides a set of ready-to-use components and styling classes for rapid development.
 
-- **MobX**: A state management library that helps manage application state with ease, improving reactivity and maintainability.
+- **Zustand**: A state management library that helps manage application state with ease, improving reactivity and maintainability.
 
 - **NextAuth.js**: An authentication library for Next.js applications that supports various authentication providers and provides a seamless authentication flow.
 
