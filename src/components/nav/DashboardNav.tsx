@@ -10,7 +10,7 @@ import Logout from "../../../public/assets/icons/logout.png";
 
 const DashboardNav: React.FC = () => {
   return (
-    <nav className="bg-gray-100 text-white h-full w-[235px] fixed top-0 left-0">
+    <nav className="bg-gray-light text-white h-full w-[235px] fixed top-0 left-0">
       <div className="flex flex-col h-full items-center text-black relative">
         <Link href="/">
           <div className="mt-12">
@@ -19,36 +19,36 @@ const DashboardNav: React.FC = () => {
         </Link>
         <div className="flex flex-col mt-20">
           <Link href="/dashboard">
-            <button className="mb-6 flex items-center gap-2">
+            <button className="mb-6 flex items-center gap-3">
               <Image src={Dashboard} alt="dashboard-icon" />
               <p className="mt-1">Dashboard</p>
             </button>
           </Link>
           <Link href="/calendar">
-            <button className="mb-6 flex items-center gap-2">
+            <button className="mb-6 flex items-center gap-3">
               <Image src={Calendar} alt="calendar-icon" />
               <p className="mt-1">Calendar</p>
             </button>
           </Link>
           <Link href="/email">
-            <button className="mb-6 flex items-center gap-2">
+            <button className="mb-6 flex items-center gap-3">
               <Image src={Email} alt="email-icon" />
               <p className="mt-1">Email</p>
             </button>
           </Link>
           <Link href="/settings">
-            <button className="mb-6 flex items-center gap-2">
+            <button className="mb-6 flex items-center gap-3">
               <Image src={Settings} alt="settings-icon" />
               <p className="mt-1">Settings</p>
             </button>
           </Link>
         </div>
         <div className="flex flex-col mb-8 absolute bottom-0">
-          <button className="mb-6 flex items-center gap-2">
+          <button className="mb-6 flex items-center gap-3">
             <Image src={Darkmode} alt="darkmode-icon" />
             <p className="mt-1">Dark mode</p>
           </button>
-          <button className="mb-6 flex items-center gap-2">
+          <button className="mb-6 flex items-center gap-3">
             <Image src={Logout} alt="logout-icon" />
             <p className="mt-1">Logout</p>
           </button>
