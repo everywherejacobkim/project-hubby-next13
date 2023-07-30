@@ -7,7 +7,7 @@ const DashboardPage = () => {
     <DashboardLayout
       HeaderComponent={<DashboardHeader />}
       LeftMenuComponent={<DashboardNav />}
-      MainComponent={""}
+      MainComponent={"Here is for main components"}
     />
   );
 };
