@@ -19,7 +19,7 @@ const DashboardLayout = ({
         <button className="text-blue-500 text-xs">Sign up now</button>
       </div>
     </div>
-    <div className="max-w-[984px] flex-1 hidden md:flex">{RightComponent}</div>
+    <div className="max-w-full flex-1 hidden md:flex">{RightComponent}</div>
   </div>
 );
 
