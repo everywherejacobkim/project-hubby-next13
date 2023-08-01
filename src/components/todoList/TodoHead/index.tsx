@@ -1,5 +1,5 @@
 import React from "react";
-import { useTodoState } from "../../../context/TodoContext";
+import { useTodoState } from "../../../app/context/TodoContext";
 
 const TodoHead = () => {
   const todos = useTodoState();

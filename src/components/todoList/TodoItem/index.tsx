@@ -1,11 +1,15 @@
 import React from "react";
 import { MdDone, MdDeleteOutline } from "react-icons/md";
-import { useTodoDispatch } from "../../../context/TodoContext";
+import { useTodoDispatch } from "../../../app/context/TodoContext";
 
-const CheckCircle = ({ done, children, onClick }: {
-    done: boolean;
-    children: React.ReactNode;
-    onClick: () => void;
+const CheckCircle = ({
+  done,
+  children,
+  onClick,
+}: {
+  done: boolean;
+  children: React.ReactNode;
+  onClick: () => void;
 }) => (
   <div
     className={`flex items-center justify-center w-32 h-32 rounded-full border-2 border-solid ${
@@ -17,9 +21,12 @@ const CheckCircle = ({ done, children, onClick }: {
   </div>
 );
 
-const Text = ({ done, children }: {
-    done: boolean;
-    children: React.ReactNode;
+const Text = ({
+  done,
+  children,
+}: {
+  done: boolean;
+  children: React.ReactNode;
 }) => (
   <div
     className={`flex-1 text-xl ${
@@ -30,10 +37,14 @@ const Text = ({ done, children }: {
   </div>
 );
 
-const Remove = ({ done, onClick, children }: {
-    done: boolean;
-    onClick: () => void;
-    children: React.ReactNode;
+const Remove = ({
+  done,
+  onClick,
+  children,
+}: {
+  done: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
 }) => (
   <div
     className={`flex items-center ${
@@ -55,10 +66,14 @@ const ParentContainer = ({ children }: { children: React.ReactNode }) => (
   <div className="flex">{children}</div>
 );
 
-const TodoItem = ({ id, done, text }: {
-    id: number;
-    done: boolean;
-    text: string;
+const TodoItem = ({
+  id,
+  done,
+  text,
+}: {
+  id: number;
+  done: boolean;
+  text: string;
 }) => {
   const dispatch = useTodoDispatch();
 

@@ -1,4 +1,5 @@
 import React from "react";
+import TodoList from "@/components/todoList/TodoList";
 
 const DashboardGrid: React.FC = () => {
   return (
@@ -22,7 +23,7 @@ const DashboardGrid: React.FC = () => {
       </div>
 
       <div className="bg-gray-light flex items-center justify-center col-span-2 row-span-3">
-        To-do
+        <TodoList />
       </div>
     </div>
   );
