@@ -50,7 +50,7 @@ const TodoList: React.FC = () => {
 
   return (
     <div className="relative w-full p-4">
-      <h1 className="text-2xl font-bold mb-4">Your to-Do list</h1>
+      <h1 className="text-[14pt] font-semibold mb-4">Your to-Do list</h1>
       <ul>
         {todos.map((todo) => (
           <TodoItem
@@ -65,13 +65,13 @@ const TodoList: React.FC = () => {
       <div className="absolute flex mb-4 w-full md:pr-8 bottom-0">
         <input
           type="text"
-          className="border rounded p-2 w-full"
+          className="border rounded p-3 w-full bg-primary"
           placeholder="New task..."
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
         />
         <button
-          className="bg-blue-500 text-white rounded px-4 py-2 ml-2"
+          className="absolute right-10 z-50 bg-primary-action text-white rounded px-3.5 py-1 my-1.5"
           onClick={addTodo}
         >
           <div className="text-2xl">+</div>

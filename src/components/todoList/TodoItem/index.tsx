@@ -39,7 +39,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
   };
 
   return (
-    <li className="flex items-center justify-between mb-2 p-2 bg-gray-100 rounded">
+    <li className="flex items-center justify-between mb-2 p-2 bg-white rounded">
       <div className="flex items-center">
         <label className="flex items-center cursor-pointer">
           <input
@@ -48,14 +48,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
             onChange={() => toggleTodo(todo.id)}
             className="hidden"
           />
-          <div className="w-6 h-6 rounded-full border border-gray-400 flex items-center justify-center bg-white mr-2">
+          <div className="w-6 h-6 rounded-full border border-black flex items-center justify-center bg-white mr-2">
             {todo.completed && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                className="w-4 h-4 text-green-500"
+                className="w-4 h-4 text-primary-dark"
               >
                 <path
                   strokeLinecap="round"
@@ -73,7 +73,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
               onChange={handleTextChange}
               onBlur={handleSaveClick}
               autoFocus
-              className="outline-none border-b border-dotted focus:border-blue-500 px-1"
+              className="outline-none px-1"
             />
           ) : (
             <p className={todo.completed ? "line-through" : ""}>{todo.text}</p>
@@ -81,10 +81,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
         </label>
       </div>
       <div className="flex gap-2">
-        <button
-          className="text-blue-500 hover:text-blue-700 ml-2"
-          onClick={handleEditClick}
-        >
+        <button onClick={handleEditClick}>
           <Image
             src="/assets/icons/edit.png"
             width={20}
@@ -92,10 +89,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
             alt="edit-icon"
           />
         </button>
-        <button
-          className="text-red-500 hover:text-red-700"
-          onClick={() => deleteTodo(todo.id)}
-        >
+        <button onClick={() => deleteTodo(todo.id)}>
           <Image
             src="/assets/icons/delete.png"
             width={20}
