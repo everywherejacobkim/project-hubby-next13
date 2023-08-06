@@ -1,5 +1,6 @@
 import React from "react";
 import TodoList from "@/components/todoList/TodoList";
+import ChatGPT from "@/components/chatbot/ChatGPT";
 
 const DashboardGrid: React.FC = () => {
   return (
@@ -21,7 +22,7 @@ const DashboardGrid: React.FC = () => {
         Notes
       </div>
       <div className="flex justify-center col-span-2 row-span-4 border border-neutral-border">
-        ChatGPT
+        <ChatGPT />
       </div>
       <div className="flex justify-center col-span-2 row-span-3 border border-neutral-border">
         <TodoList />
