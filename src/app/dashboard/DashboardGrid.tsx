@@ -3,23 +3,17 @@ import TodoList from "@/components/todoList/TodoList";
 
 const DashboardGrid: React.FC = () => {
   return (
-    <div className="grid grid-cols-6 gap-4 p-4 h-full">
+    <div className="grid grid-cols-6 gap-4 p-4 h-full ">
       {/* add each components in the gird */}
-      <div className="bg-gray-light flex justify-center">Clock</div>
-      <div className="bg-gray-light flex justify-center">Date</div>
-      <div className="bg-gray-light flex justify-center col-span-2">
-        Weather
+      <div className="flex justify-center border border-neutral-border">
+        Clock
       </div>
-      <div className="bg-gray-light flex justify-center col-span-2 row-span-2">
-        Timer
-      </div>
-      <div className="bg-gray-light flex justify-center col-span-2 row-span-4">
-        Notes
-      </div>
-      <div className="bg-gray-light flex justify-center col-span-2 row-span-4">
-        ChatGPT
-      </div>
-      <div className="bg-gray-light flex justify-center col-span-2 row-span-3">
+      <div className="flex justify-center border border-neutral-border">Date</div>
+      <div className="flex justify-center col-span-2 border border-neutral-border">Weather</div>
+      <div className="flex justify-center col-span-2 row-span-2 border border-neutral-border">Timer</div>
+      <div className="flex justify-center col-span-2 row-span-4 border border-neutral-border">Notes</div>
+      <div className="flex justify-center col-span-2 row-span-4 border border-neutral-border">ChatGPT</div>
+      <div className="flex justify-center col-span-2 row-span-3 border border-neutral-border">
         <TodoList />
       </div>
     </div>
