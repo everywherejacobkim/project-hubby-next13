@@ -5,17 +5,23 @@ const CurrentTime:React.FC = () => {
     let now: Date =  new Date();
 
     const options: Intl.DateTimeFormatOptions = {
+        timeZoneName: 'short',
         hour: 'numeric',
         minute: 'numeric',
-        // second: 'numeric',
-        timeZoneName: 'short',
+        second: 'numeric',
+       
       };
       
-    const formaattedTime: string = new Intl.DateTimeFormat('en-US', options).format(now)
-    console.log(formaattedTime)
+    const formattedTime: string = new Intl.DateTimeFormat('en-US', options).format(now)
+    // console.log(formaattedTime)
+    let splitTimeZone = formattedTime.split(" ");
+    console.log(splitTimeZone);
     return (
-        <div>
-        <h1>{formaattedTime}</h1>
+        <div className='box-content'>
+            <h1 >{splitTimeZone[2]}</h1>
+            <div className='mt-10'>
+                <h1 className='text-3xl'>{splitTimeZone[0]}</h1>
+            </div>
         </div>
     );
 }
