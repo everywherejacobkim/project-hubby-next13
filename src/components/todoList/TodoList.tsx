@@ -49,7 +49,7 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full p-4">
+    <div className="relative w-full">
       <h1 className="text-[14pt] font-semibold mb-4">Your to-Do list</h1>
       <ul>
         {todos.map((todo) => (

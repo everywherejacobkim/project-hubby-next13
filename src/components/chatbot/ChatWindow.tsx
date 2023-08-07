@@ -14,7 +14,7 @@ interface MessageProps {
   key: number;
 }
 
-const ChatGPT: React.FC = () => {
+const ChatWindow: React.FC = () => {
   const [messages, setMessages] = useState<MessageProps[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -50,7 +50,7 @@ const ChatGPT: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full p-2 mx-auto bg-white max-h-screen">
+    <div className="relative w-full p-2 mx-auto bg-white max-h-screen overflow-y-scroll">
       <h1>ChatGPT</h1>
       <div className="p-4">
         {messages.map((msg: MessageProps) => (
@@ -64,4 +64,4 @@ const ChatGPT: React.FC = () => {
   );
 };
 
-export default ChatGPT;
+export default ChatWindow;
