@@ -1,7 +1,6 @@
 import React from "react";
 import TodoList from "@/components/todoList/TodoList";
-import ChatWindow from "@/components/chatbot/ChatWindow";
-import ChatHistory from "@/components/chatbot/ChatHistory";
+import ChatGPT from "@/components/chatbot/ChatGpt";
 
 const DashboardGrid: React.FC = () => {
   return (
@@ -23,7 +22,7 @@ const DashboardGrid: React.FC = () => {
         Notes
       </div>
       <div className="flex justify-center col-span-2 row-span-4 p-4 border border-neutral-border">
-        <ChatHistory />
+        <ChatGPT />
       </div>
       <div className="flex justify-center col-span-2 row-span-3 p-4  border border-neutral-border">
         <TodoList />

@@ -1,7 +1,14 @@
 "use client";
 import React, { useState, useRef } from "react";
+import Image from "next/image";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
+import backIcon from "../../../public/assets/icons/back.png";
+import newScreenIcon from "../../../public/assets/icons/newscreen.png";
+
+interface ChatProps {
+  switchToHistory: () => void;
+}
 
 enum Creator {
   Me = 0,
@@ -14,7 +21,7 @@ interface MessageProps {
   key: number;
 }
 
-const ChatWindow: React.FC = () => {
+const ChatWindow: React.FC<ChatProps> = ({ switchToHistory }) => {
   const [messages, setMessages] = useState<MessageProps[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -50,14 +57,21 @@ const ChatWindow: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full p-2 mx-auto bg-white max-h-screen overflow-y-scroll">
-      <h1>ChatGPT</h1>
+    <div className="relative w-full p-1 bg-white max-h-screen overflow-x-hidden">
+      <div className="flex justify-between">
+        <h1 className="font-semibold">ChatGPT</h1>
+        <Image src={newScreenIcon} alt="screen-icon" />
+      </div>
+      <button onClick={switchToHistory} className="my-3.5 mx-2">
+        <Image src={backIcon} alt="back-icon" />
+      </button>
+      <hr className="custom-divider-2" />
       <div className="p-4">
         {messages.map((msg: MessageProps) => (
           <ChatMessage key={msg.key} text={msg.text} from={msg.from} />
         ))}
       </div>
-      <div className="absolute bottom-0 w-full py-4 px-2">
+      <div className="absolute bottom-0 w-full py-4 pr-2">
         <ChatInput onSend={(input) => callApi(input)} disabled={loading} />
       </div>
     </div>

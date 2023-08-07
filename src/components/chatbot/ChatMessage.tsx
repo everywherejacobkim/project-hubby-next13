@@ -16,13 +16,13 @@ const ChatMessage = ({ text, from }: MessageProps) => {
     <div>
       {from == Creator.Me && (
         <div className="bg-primary/40 p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap">
-          <h1>User:</h1>
+          <h2>You:</h2>
           <p className="text-black">{text}</p>
         </div>
       )}
       {from == Creator.Bot && (
         <div className="bg-primary-dark/40 p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap">
-          <h1>Bot:</h1>
+          <h2>Bot:</h2>
           <p className="text-black">{text}</p>
         </div>
       )}

@@ -7,7 +7,7 @@ const DashboardLayout = ({
   LeftComponent,
   RightComponent,
 }: AuthLayoutProps) => (
-  <div className="w-screen h-screen flex">
+  <div className="w-screen h-screen flex bg-black/4">
     <div className="max-w-[456px] flex-1">
       <div className="mx-20 mt-20">
         <Image src={logo} alt="logo" />

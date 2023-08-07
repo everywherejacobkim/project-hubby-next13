@@ -6,6 +6,10 @@ import deleteIcon from "../../../public/assets/icons/trash.png";
 import nextIcon from "../../../public/assets/icons/next.png";
 import dialogueIcon from "../../../public/assets/icons/dialogue.png";
 
+interface HistoryProps {
+  switchToChat: () => void;
+}
+
 interface ListItem {
   id: number;
   title: string;
@@ -17,7 +21,7 @@ const mockData: ListItem[] = [
   { id: 3, title: "Why is the air invisible?" },
 ];
 
-const ChatHistory: React.FC = () => {
+const ChatHistory: React.FC<HistoryProps> = ({ switchToChat }) => {
   const [items, setItems] = useState<ListItem[]>(mockData);
 
   const handleDelete = (id: number) => {
@@ -27,7 +31,7 @@ const ChatHistory: React.FC = () => {
 
   return (
     <div className="relative flex flex-col w-full">
-      <h1 className="text-[14pt] font-semibold mb-4">Chatgpt</h1>
+      <h1 className="mb-4 font-semibold">Chatgpt</h1>
       <ul>
         {items.map((item) => (
           <li
@@ -57,7 +61,10 @@ const ChatHistory: React.FC = () => {
         ))}
       </ul>
       <div className="absolute bottom-0 mb-4 w-full">
-        <button className="w-full h-12 py-1 bg-blue-500 text-white rounded">
+        <button
+          onClick={switchToChat}
+          className="w-full h-12 py-1 bg-blue-500 text-white rounded"
+        >
           New chat
         </button>
       </div>
