@@ -10,3 +10,17 @@
     font-family: "Roboto", sans-serif;
   }
 }
+
+h1 {
+  font-size: 14pt;
+}
+
+.custom-divider-1 {
+  border: 0.5px solid #ecedf7;
+  margin: 25px 0;
+}
+
+.custom-divider-2 {
+  border: 0.5px solid #b3b3b3;
+  margin: 15px 0;
+}

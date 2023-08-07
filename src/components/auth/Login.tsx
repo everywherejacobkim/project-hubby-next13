@@ -81,17 +81,17 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         <div className="my-4">
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded text-sm p-1"
+            className="w-full bg-primary-action hover:bg-primary-action/95 text-white py-2 rounded text-sm p-1"
           >
             Sign in
           </button>
         </div>
       </Link>
-
+      <hr className="custom-divider-1" />
       <div>
         <button
           type="button"
-          className="flex justify-center items-center w-full bg-red-500 hover:bg-red-600 text-black bg-gray-dark py-2 rounded"
+          className="flex justify-center items-center w-full bg-neutral-dark hover:bg-neutral-dark/95 text-black bg-gray-dark py-2 rounded"
         >
           <FcGoogle className="inline-block mr-2" />
           <p className="text-white text-xs p-1">Sign in with Google</p>
