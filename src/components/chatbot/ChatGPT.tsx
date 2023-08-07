@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { BsSend } from "react-icons/bs";
+import ChatMessage from "./ChatMessage";
+import ChatInput from "./ChatInput";
 
 enum Creator {
   Me = 0,
@@ -12,65 +13,6 @@ interface MessageProps {
   from: Creator;
   key: number;
 }
-
-interface InputProps {
-  onSend: (text: string) => void;
-  disabled: boolean;
-}
-
-const ChatMessage = ({ text, from }: MessageProps) => {
-  return (
-    <div>
-      {from == Creator.Me && (
-        <div className="bg-primary/40 p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap">
-          <h1>User:</h1>
-          <p className="text-black">{text}</p>
-        </div>
-      )}
-      {from == Creator.Bot && (
-        <div className="bg-primary-dark/40 p-4 rounded-lg flex gap-4 items-center whitespace-pre-wrap">
-          <h1>Bot:</h1>
-          <p className="text-black">{text}</p>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const ChatInput = ({ onSend, disabled }: InputProps) => {
-  const [Input, setInput] = useState("");
-
-  const sendInput = () => {
-    onSend(Input);
-    setInput("");
-  };
-
-  const handleKeyEnter = (event: any) => {
-    if (event.key === "Enter") {
-      sendInput();
-    }
-  };
-
-  return (
-    <div className="flex">
-      <input
-        type="text"
-        value={Input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => handleKeyEnter(e)}
-        disabled={disabled}
-        className="w-full border border-neutral-border p-3 rounded-lg mr-2"
-      />
-      <button
-        onClick={sendInput}
-        disabled={disabled}
-        className="bg-primary-action absolute right-5 mt-1.5 p-3 rounded-lg"
-      >
-        <BsSend className="text-white" />
-      </button>
-    </div>
-  );
-};
 
 const ChatGPT: React.FC = () => {
   const [messages, setMessages] = useState<MessageProps[]>([]);
