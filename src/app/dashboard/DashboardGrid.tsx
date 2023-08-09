@@ -3,6 +3,7 @@ import TodoList from "@/components/todoList/TodoList";
 import CurrentDate from "@/components/date/Date";
 import CurrentTime from "@/components/date/Time";
 import CurrentWeather from "@/components/location/CurrentWeather";
+import ChatGPT from "@/components/chatbot/ChatGpt";
 
 const DashboardGrid: React.FC = () => {
   return (
@@ -17,16 +18,16 @@ const DashboardGrid: React.FC = () => {
       <div className="flex py-5 justify-center col-span-2 border border-neutral-border">
        <CurrentWeather />
       </div>
-      <div className="flex justify-center col-span-2 row-span-2 border border-neutral-border">
+      <div className="flex justify-center col-span-2 row-span-2 p-4 border border-neutral-border">
         Timer
       </div>
-      <div className="flex justify-center col-span-2 row-span-4 border border-neutral-border">
+      <div className="flex justify-center col-span-2 row-span-4 p-4 border border-neutral-border">
         Notes
       </div>
-      <div className="flex justify-center col-span-2 row-span-4 border border-neutral-border">
-        ChatGPT
+      <div className="flex justify-center col-span-2 row-span-4 p-4 border border-neutral-border">
+        <ChatGPT />
       </div>
-      <div className="flex justify-center col-span-2 row-span-3 border border-neutral-border">
+      <div className="flex justify-center col-span-2 row-span-3 p-4  border border-neutral-border">
         <TodoList />
       </div>
     </div>
