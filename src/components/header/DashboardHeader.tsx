@@ -1,4 +1,5 @@
 import { FiBell, FiUser } from "react-icons/fi";
+import CurrentWeather from "../location/CurrentWeather";
 
 const DashboardHeader: React.FC = () => {
   return (

@@ -6,10 +6,15 @@ import React, { useState, useEffect } from 'react';
 
 
 
-const CLIENT_ID = '719390433566-169f1sca4us02k3rna4i7755103rlnp6.apps.googleusercontent.com'; // Replace with your actual Client ID
-const API_KEY = 'AIzaSyAt4J-i_Eld0bUCTSkKXUA3xDbOqZVAb0U'; // Replace with your actual API Key
-const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
-const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+// const CLIENT_ID = '719390433566-169f1sca4us02k3rna4i7755103rlnp6.apps.googleusercontent.com'; // Replace with your actual Client ID
+// const API_KEY = 'AIzaSyAt4J-i_Eld0bUCTSkKXUA3xDbOqZVAb0U'; // Replace with your actual API Key
+// const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
+// const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
+import { RequestInfo, RequestInit } from 'node-fetch';
+
+const fetch = (url: RequestInfo, init?: RequestInit) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(url, init));
+
 // const fetch = require('node-fetch');
 
 interface TokenClient {
@@ -56,8 +61,8 @@ function GmailApiQuickStart() {
 
   async function initializeGapiClient() {
     await window.gapi.client.init({
-      apiKey: API_KEY,
-      discoveryDocs: [DISCOVERY_DOC],
+      apiKey: process.env.REACT_APP_API_KEY,
+      discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOC],
     });
     setGapiInited(true);
     maybeEnableButtons();
@@ -65,8 +70,8 @@ function GmailApiQuickStart() {
 
   function gisLoaded() {
     window.tokenClient = window.google.accounts.oauth2.initTokenClient({
-      client_id: CLIENT_ID,
-      scope: SCOPES,
+      client_id: process.env.REACT_APP_CLIENT_ID,
+      scope: process.env.REACT_APP_SCOPES,
       callback: '', // defined later
     });
     setGisInited(true);

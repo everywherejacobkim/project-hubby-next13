@@ -7,13 +7,9 @@ const CurrentDate:React.FC= () => {
     let now: Date =  new Date();
     const todayDate = now.toDateString(); //covert date to string
 
-    // const todayInMilliseconds = new Date(todayDate).getTime();
-    // const year = now.getFullYear();   
-    // const month = now.getMonth();
-    // const day =  now.getDay(); 
-    // const timeTo = now.toTimeString() // only time
+   
     const monthTo = now.toLocaleString('default',{month:'long'}) // only time
-    // const nowDate: Date = new Date(year, month, day);
+    
   
     
    
@@ -43,13 +39,13 @@ let month_value = now.getMonth();
 let day_value = now.getDate();
 let year_value = now.getFullYear();
 
-console.log(day_value)
+
 function daysToSrting() {
     const daysOfWeek = ['Sunday', 'Monday','Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return daysOfWeek[now.getDay()]
   }
   
-  console.log("Date covert" + " " + daysToSrting())
+  // console.log("Date covert" + " " + daysToSrting())
 //     console.log(months[month_value] + " " + day_value+", " + year_value)
 
   return (

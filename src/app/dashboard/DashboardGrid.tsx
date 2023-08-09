@@ -2,6 +2,7 @@ import React from "react";
 import TodoList from "@/components/todoList/TodoList";
 import CurrentDate from "@/components/date/Date";
 import CurrentTime from "@/components/date/Time";
+import CurrentWeather from "@/components/location/CurrentWeather";
 
 const DashboardGrid: React.FC = () => {
   return (
@@ -13,8 +14,8 @@ const DashboardGrid: React.FC = () => {
       <div className="flex border p-5 border-neutral-border">
         <CurrentDate />
       </div>
-      <div className="flex justify-center col-span-2 border border-neutral-border">
-        Weather
+      <div className="flex py-5 justify-center col-span-2 border border-neutral-border">
+       <CurrentWeather />
       </div>
       <div className="flex justify-center col-span-2 row-span-2 border border-neutral-border">
         Timer
