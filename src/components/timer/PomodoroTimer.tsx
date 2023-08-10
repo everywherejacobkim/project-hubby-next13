@@ -23,11 +23,11 @@ const PomodoroTimer: React.FC<{
         if (time > 0) {
           setTime(time - 1);
         } else {
-          setIsBreak(true);
-          setTime(breakTime);
+          setIsBreak(!isBreak);
           if (isBreak) {
-            setCompletedCycles(completedCycles + 0.5);
+            setCompletedCycles(completedCycles + 1);
           }
+          setTime(isBreak ? initialPomodoro : breakTime);
         }
       }, 1000);
     }
@@ -37,7 +37,15 @@ const PomodoroTimer: React.FC<{
         clearInterval(interval);
       }
     };
-  }, [time, breakTime, isBreak, completedCycles, isRunning, isPaused]);
+  }, [
+    time,
+    breakTime,
+    isBreak,
+    completedCycles,
+    isRunning,
+    isPaused,
+    initialPomodoro,
+  ]);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -65,7 +73,11 @@ const PomodoroTimer: React.FC<{
         <div className="w-48 h-48">
           <div className="w-full h-full rounded-full border-8">
             <div className="text-lg mt-2 text-center px-4 pt-8">
-              {isBreak ? "Break" : `#${completedCycles}`}
+              {isBreak
+                ? "Break"
+                : completedCycles === 0
+                ? "Focus"
+                : `#${completedCycles}`}
             </div>
             <div className="text-4xl font-bold text-center px-4 pt-2 pb-6">
               {formatTime(minutes)}:{formatTime(seconds)}

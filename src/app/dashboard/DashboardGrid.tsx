@@ -20,7 +20,7 @@ const DashboardGrid: React.FC = () => {
         <CurrentWeather />
       </div>
       <div className="flex justify-center col-span-2 row-span-2 p-4 border border-neutral-border">
-        <PomodoroTimer initialPomodoro={25 * 60} initialBreak={10 * 60} />
+        <PomodoroTimer initialPomodoro={0.2 * 60} initialBreak={0.1 * 60} />
       </div>
       <div className="flex justify-center col-span-2 row-span-4 p-4 border border-neutral-border">
         Notes
