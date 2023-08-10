@@ -49,14 +49,12 @@ function daysToSrting() {
 //     console.log(months[month_value] + " " + day_value+", " + year_value)
 
   return (
-    <div>
-        <h1>{daysToSrting()}</h1>
-        <div className='mt-10'>
-          <span className='text-3xl'>{day_value} </span>
-          <span className='text-3xl'>{months[month_value]}</span>
-       </div>
-        
-        
+    <div className='w-full justify-start'>
+        <h1 className='font-semibold'>{daysToSrting()}</h1>
+        <div className='mt-24'>
+          <span className='sm:text-3xl font-medium'>{day_value} </span>
+          <span className='sm:text-3xl font-medium'>{months[month_value]}</span>
+        </div>
     </div>
    
   )

@@ -64,20 +64,23 @@ const CurrentWeather:React.FC = () => {
        {weather !== null ? 
         <div>
          
-          <p>{weather.name}</p>
-          <div className="flex mt-10">
-            <p className="text-2xl">{weather.main.temp}°</p>
-            <div className="flex" >
+          <h1 className="font-semibold">{weather.name}</h1>
+          <div className="flex mt-24 ">
+            <p className="text-3xl">{weather.main.temp}°</p>
+            <div className="flex pl-3 pt-3" >
               <p> {weather.weather[0].main}</p>
-              <span > {Math.floor(weather.main.temp_max)}°</span>
+              <span className="pl-1"> {Math.floor(weather.main.temp_max)}°</span>
               <span>/ {Math.floor(weather.main.temp_min)}°</span> 
             </div>
-          <Image
-            src={weatherImage}
-            alt="weather image"
-            width={100}
-            height={100}
-          />
+            <div >
+            <Image
+              src={weatherImage}
+              alt="weather image"
+              width={250}
+              // height={400}
+              className="absolute -top-1 right-0"
+            />
+            </div>
           </div>   
           
         </div>

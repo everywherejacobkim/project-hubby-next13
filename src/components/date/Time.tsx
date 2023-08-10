@@ -31,12 +31,12 @@ const CurrentTime:React.FC = () => {
         return () => {
           clearInterval(intervalId); // Cleanup the interval on component unmount
         };
-      }, [currentTime]);
+      }, [currentTime]);// keep update time
     
     
     // console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 
-    // console.log({currentTime})
+    console.log({currentTime})
 
     // Searching time zone
     const options: Intl.DateTimeFormatOptions = {
@@ -47,14 +47,14 @@ const CurrentTime:React.FC = () => {
     const timeZone: string = new Intl.DateTimeFormat('en-US', options).format(now)
    
     let splitTimeZone = timeZone.split(" ");
-    // console.log(splitTimeZone);
+    console.log(splitTimeZone);
 
 
     return (
-        <div className='box-content'>
-            <h1 >{splitTimeZone[2]}</h1>
-                <div className='mt-10'>
-                    {isClient ? <h1> {currentTime}</h1> : ('nothing')}
+        <div className='box-content w-full'>
+            <h1 className='font-semibold'>{splitTimeZone[1]}</h1>
+                <div className='mt-24'>
+                    {isClient ? <h1 className='sm:text-3xl text-left font-medium'> {currentTime}</h1> : ('nothing')}
                 </div> 
         </div>
     );
