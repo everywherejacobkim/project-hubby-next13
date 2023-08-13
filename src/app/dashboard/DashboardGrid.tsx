@@ -4,6 +4,7 @@ import CurrentDate from "@/components/date/Date";
 import CurrentTime from "@/components/date/Time";
 import CurrentWeather from "@/components/location/CurrentWeather";
 import ChatGPT from "@/components/chatbot/ChatGpt";
+import PomodoroTimer from "@/components/timer/PomodoroTimer";
 
 const DashboardGrid: React.FC = () => {
   return (
@@ -19,7 +20,7 @@ const DashboardGrid: React.FC = () => {
        <CurrentWeather />
       </div>
       <div className="flex justify-center col-span-2 row-span-2 p-4 border border-neutral-border">
-        Timer
+        <PomodoroTimer initialPomodoro={0.2 * 60} initialBreak={0.1 * 60} />
       </div>
       <div className="flex justify-center col-span-2 row-span-4 p-4 border border-neutral-border">
         Notes

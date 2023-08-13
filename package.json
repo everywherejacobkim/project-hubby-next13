@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@prisma/client": "5.0.0",
-    "framer-motion": "^10.15.1",
     "next": "13.4.10",
     "node-fetch": "^2.6.1",
     "openai": "^3.3.0",
