@@ -28,7 +28,6 @@ const CurrentTime: React.FC = () => {
     };
   }, []);
 
-  // Searching time zone
   const options: Intl.DateTimeFormatOptions = {
     timeZoneName: "short",
   };
@@ -41,11 +40,11 @@ const CurrentTime: React.FC = () => {
   console.log(splitTimeZone);
 
   return (
-    <div className="box-content w-full">
-      <h1 className="font-semibold">{splitTimeZone[1]}</h1>
-      <div className="mt-24">
+    <div className="w-full h-fit">
+      <h1 className="flex-start font-semibold">{splitTimeZone[1]}</h1>
+      <div className="mt-8">
         {isClient ? (
-          <h1 className="sm:text-3xl text-left font-medium"> {currentTime}</h1>
+          <h1 className="sm:text-3xl text-left font-medium">{currentTime}</h1>
         ) : (
           "nothing"
         )}

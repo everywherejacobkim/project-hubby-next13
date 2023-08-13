@@ -1,8 +1,7 @@
-'use client'
-
+"use client";
 import Image from "next/image";
-import {useState, useEffect} from "react"
-import weatherImage from "../../assets/images/weather.png"
+import { useState, useEffect } from "react";
+import weatherCloud from "../../../public/assets/images/png/weather-ui/weather-cloud.png";
 interface Location {
   latitude: number;
   longitude: number;
@@ -20,12 +19,10 @@ interface WeatherData {
   }[];
 }
 
-const CurrentWeather:React.FC = () => {
-
-  const [location, setLocation] = useState<Location | null >(null);
-  const [weather, setWeather] = useState<WeatherData |null >(null);
-  const [minTemp, setMinTemp] = useState<null>(null)
-  
+const CurrentWeather: React.FC = () => {
+  const [location, setLocation] = useState<Location | null>(null);
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [minTemp, setMinTemp] = useState<null>(null);
 
   useEffect(() => {
     function success(position: GeolocationPosition) {
@@ -57,36 +54,39 @@ const CurrentWeather:React.FC = () => {
     }
   }, []);
 
- 
- 
   return (
-    <div>
-       {weather !== null ? 
+    <div className="flex w-full justify-between h-fit">
+      {weather ? (
         <div>
-         
           <h1 className="font-semibold">{weather.name}</h1>
-          <div className="flex mt-24 ">
-            <p className="text-3xl">{weather.main.temp}°</p>
-            <div className="flex pl-3 pt-3" >
+          <div className="flex mt-8">
+            <p className="text-3xl font-semibold">
+              {Math.ceil(weather.main.temp)}°
+            </p>
+            <div className="flex pl-3 pt-3">
               <p> {weather.weather[0].main}</p>
-              <span className="pl-1"> {Math.floor(weather.main.temp_max)}°</span>
-              <span>/ {Math.floor(weather.main.temp_min)}°</span> 
+              <span className="pl-1">
+                {" "}
+                {Math.floor(weather.main.temp_max)}°
+              </span>
+              <span>/ {Math.floor(weather.main.temp_min)}°</span>
             </div>
-            <div >
-            <Image
-              src={weatherImage}
-              alt="weather image"
-              width={250}
-              // height={400}
-              className="absolute -top-1 right-0"
-            />
-            </div>
-          </div>   
-          
+          </div>
         </div>
-      : null} 
+      ) : (
+        "Loading..."
+      )}
+      <div className="h-fit">
+        <Image
+          src={weatherCloud}
+          alt="weather image"
+          width={150}
+          height={150}
+          className="object-fit"
+        />
+      </div>
     </div>
   );
-}
+};
 
-export default CurrentWeather
+export default CurrentWeather;
