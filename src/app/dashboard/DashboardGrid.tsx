@@ -16,13 +16,8 @@ const DashboardGrid: React.FC = () => {
       <div className="flex justify-center border p-5 border-neutral-border">
         <CurrentDate />
       </div>
-<<<<<<< HEAD
-      <div className="flex py-5 justify-center col-span-2 border border-neutral-border">
-        <CurrentWeather />
-=======
       <div className="flex p-5 justify-left relative col-span-2 border border-neutral-border">
        <CurrentWeather />
->>>>>>> fc188696a32b0253df60cfb8bedbf3aac22e65ec
       </div>
       <div className="flex justify-center col-span-2 row-span-2 p-4 border border-neutral-border">
         <PomodoroTimer initialPomodoro={0.2 * 60} initialBreak={0.1 * 60} />
