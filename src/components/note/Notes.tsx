@@ -22,7 +22,7 @@ const Notes = () => {
       {/* Notes list */}
       <div className="flex flex-col gap-2 p-2">
         {newNote.map((note, index) => (
-          <div key={index} className="font-semibold">
+          <div key={index} className=" bg-primary py-2 px-3 rounded-lg">
             {note}
           </div>
         ))}

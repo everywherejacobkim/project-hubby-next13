@@ -44,7 +44,9 @@ const CurrentTime: React.FC = () => {
       <h1 className="flex-start font-semibold">{splitTimeZone[1]}</h1>
       <div className="mt-8">
         {isClient ? (
-          <h1 className="sm:text-3xl text-left font-medium">{currentTime}</h1>
+          <p className="text-3xl tracking-wider text-center font-medium pr-1">
+            {currentTime}
+          </p>
         ) : (
           "nothing"
         )}
