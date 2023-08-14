@@ -71,7 +71,7 @@ const TodoList: React.FC = () => {
           onChange={(e) => setNewTodo(e.target.value)}
         />
         <button
-          className="absolute right-1 z-50 bg-primary-action text-white rounded px-3.5 py-1 my-1.5"
+          className="absolute right-1 z-30 bg-primary-action text-white rounded px-3.5 py-1 my-1.5"
           onClick={addTodo}
         >
           <div className="text-2xl">+</div>
