@@ -60,7 +60,7 @@ const ChatHistory: React.FC<HistoryProps> = ({ switchToChat }) => {
           </li>
         ))}
       </ul>
-      <div className="absolute bottom-0 mb-4 w-full">
+      <div className="absolute bottom-0 w-full">
         <button
           onClick={switchToChat}
           className="w-full h-12 py-1 bg-primary-action text-white rounded-lg"

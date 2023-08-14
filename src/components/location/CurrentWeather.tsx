@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import weatherCloud from "../../../public/assets/images/png/weather-ui/weather-cloud.png";
+
 interface Location {
   latitude: number;
   longitude: number;

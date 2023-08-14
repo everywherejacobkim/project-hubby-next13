@@ -62,7 +62,7 @@ const TodoList: React.FC = () => {
           />
         ))}
       </ul>
-      <div className="absolute flex mb-4 w-full md:pr-8 bottom-0">
+      <div className="absolute flex w-full bottom-0">
         <input
           type="text"
           className="border rounded p-3 w-full bg-primary"
@@ -71,7 +71,7 @@ const TodoList: React.FC = () => {
           onChange={(e) => setNewTodo(e.target.value)}
         />
         <button
-          className="absolute right-10 z-50 bg-primary-action text-white rounded px-3.5 py-1 my-1.5"
+          className="absolute right-1 z-30 bg-primary-action text-white rounded px-3.5 py-1 my-1.5"
           onClick={addTodo}
         >
           <div className="text-2xl">+</div>
