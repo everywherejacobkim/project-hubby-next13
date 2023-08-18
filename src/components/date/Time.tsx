@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const CurrentTime: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>(getCurrentTime());
@@ -48,7 +50,7 @@ const CurrentTime: React.FC = () => {
             {currentTime}
           </p>
         ) : (
-          "nothing"
+          <Skeleton count={2} />
         )}
       </div>
     </div>
