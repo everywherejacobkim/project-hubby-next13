@@ -14,12 +14,12 @@ export const POST = async (request: { json: () => Promise<any> }) => {
       );
     }
 
-    const new_note = await prisma.note.create({
+    const newNote = await prisma.note.create({
       data: { content },
     });
 
     // Return the newly created note with a 201 Created status
-    return NextResponse.json(new_note, { status: 201 });
+    return NextResponse.json(newNote, { status: 201 });
   } catch (error) {
     console.error("Error creating note:", error);
     return NextResponse.json(
