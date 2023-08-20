@@ -35,9 +35,9 @@ const CurrentDate: React.FC = () => {
   }
 
   return (
-    <div className="w-full h-fit justify-start">
+    <div className="w-full">
       <h1 className="font-semibold">{daysToString()}</h1>
-      <div className="mt-8">
+      <div className="mt-8 flex gap-2 justify-center">
         <span className="sm:text-3xl font-medium">{day_value} </span>
         <span className="sm:text-3xl font-medium">{months[month_value]}</span>
       </div>

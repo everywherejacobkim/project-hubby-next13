@@ -39,7 +39,7 @@ const CurrentTime: React.FC = () => {
   );
 
   let splitTimeZone = timeZone.split(" ");
-  console.log(splitTimeZone);
+  // console.log(splitTimeZone);
 
   return (
     <div className="w-full h-fit">
