@@ -1,15 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import weatherCloud from "../../../public/assets/icons/fewClouds.png";
-import cloudNight from  "../../../public/assets/icons/fewClouds_night.png";
-import brokenCloud from "../../../public/assets/icons/brokenCloud_night.png";
-import clearNight from  "../../../public/assets/icons/clear_night.png";
-import clear from  "../../../public/assets/icons/clear.png";
-import fewCloudNight from  "../../../public/assets/icons/fewCloud_night.png";
-import fewCloud from  "../../../public/assets/icons/fewClouds.png";
-import scattered from  "../../../public/assets/icons/scattered.png"; // cloud
-import rainy from  "../../../public/assets/icons/rainy.png";
 
 interface Location {
   latitude: number;
@@ -34,9 +25,11 @@ interface WeatherData {
 const CurrentWeather: React.FC = () => {
   const [location, setLocation] = useState<Location | null>(null);
   const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [minTemp, setMinTemp] = useState<null>(null);
+
 
   useEffect(() => {
+
+    
     function success(position: GeolocationPosition) {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
@@ -64,6 +57,8 @@ const CurrentWeather: React.FC = () => {
     } else {
       console.log("Geolocation not supported");
     }
+
+    
   }, []);
 
   const now = new Date();
