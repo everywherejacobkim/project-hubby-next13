@@ -1,7 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-
+import clear from "../../../public/assets/icons/clear.png"
+import clearNight from "../../../public/assets/icons/clear_night.png"
+import clouds from "../../../public/assets/icons/fewClouds.png"
+import cloudsNight from "../../../public/assets/icons/fewCloud_night.png"
+import rain from "../../../public/assets/icons/rainy.png"
+import thunder from "../../../public/assets/icons/thunderstorm.png"
 
 interface Location {
   latitude: number;
@@ -66,28 +71,59 @@ const CurrentWeather: React.FC = () => {
   // console.log(hours)
   function renderWeatherImg() {
     if (
-      weather?.weather[0].description === "clear sky" &&
+      weather?.weather[0].main === "Clear" &&
       parseInt(hours) >= 18
     ) {
-      return "/../public/assets/icons/clear_night.png";
-    } else if (weather?.weather[0].description === "clear sky") {
-      return "/../public/assets/icons/clear.png";
-    } else if (weather?.weather[0].description === "rain") {
-      return "/../public/assets/icons/rainy.png";
-    } else if (weather?.weather[0].description === "few clouds") {
-      return "/../public/assets/icons/fewClouds.png";
+      return  <Image
+      src={clearNight}
+      alt="clear night"
+      width={150}
+      height={150}
+      className="object-fit"
+    />
+    } else if (weather?.weather[0].main === "clear") {
+      return  <Image
+      src={clear}
+      alt="clear"
+      width={150}
+      height={150}
+      className="object-fit"
+    />
+    } else if (weather?.weather[0].main === "Rain") {
+      <Image
+      src={rain}
+      alt="clear"
+      width={150}
+      height={150}
+      className="object-fit"
+    />
+    } else if (weather?.weather[0].main === "Clouds") {
+      return  <Image
+      src={clouds}
+      alt="clear"
+      width={150}
+      height={150}
+      className="object-fit"
+    />
     } else if (
-      weather?.weather[0].description === "few clouds" &&
+      weather?.weather[0].main === "Clouds" &&
       parseInt(hours) >= 18
     ) {
-      return "/../public/assets/icons/fewClouds_night.png";
-    } else if (
-      weather?.weather[0].description === "broken clouds" &&
-      parseInt(hours) >= 18
-    ) {
-      return "/../public/assets/icons/brokenCloud_night.png";
-    } else if (weather?.weather[0].description === "thunderstorm") {
-      return "/../public/assets/icons/thunderstorm.png";
+      return <Image
+      src={cloudsNight}
+      alt="clear"
+      width={150}
+      height={150}
+      className="object-fit"
+    />
+    } else if (weather?.weather[0].main === "Thunderstorm") {
+      return  <Image
+      src={thunder}
+      alt="clear"
+      width={150}
+      height={150}
+      className="object-fit"
+    />
     }
   }
 
@@ -114,13 +150,7 @@ const CurrentWeather: React.FC = () => {
         "Loading..."
       )}
       <div className="h-fit">
-        <Image
-          src={renderWeatherImg()}
-          alt="weather image"
-          width={150}
-          height={150}
-          className="object-fit"
-        />
+        {renderWeatherImg()}
       </div>
     </div>
   );
