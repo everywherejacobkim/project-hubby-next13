@@ -2,6 +2,7 @@
 import "./globals.css";
 import { usePathname } from "next/navigation";
 import DashboardNav from "@/components/nav/DashboardNav";
+import NextAuthSessionProvider from "./providers/sessionProvider";
 
 export default function RootLayout({
   children,
@@ -12,7 +13,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       {pathname !== "/" && pathname !== "/dashboard" && <DashboardNav />}
-      <body className="">{children}</body>
+      <body className="">
+        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+      </body>
     </html>
   );
 }

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+// import { useSession, signIn, signOut } from "next-auth/react";
 import logo from "../../../public/assets/images/svg/logo-hubby.svg";
 import Dashboard from "../../../public/assets/icons/dashboard.png";
 import Calendar from "../../../public/assets/icons/calendar.png";
@@ -9,6 +10,8 @@ import Darkmode from "../../../public/assets/icons/darkmode.png";
 import Logout from "../../../public/assets/icons/logout.png";
 
 const DashboardNav: React.FC = () => {
+  // const { data: session } = useSession();
+  // console.log("Session", session);
   return (
     <nav className="bg-primary text-white h-full w-[235px] fixed top-0 left-0">
       <div className="flex flex-col h-full items-center text-black relative">
