@@ -6,7 +6,10 @@ import NotesModal from "./NotesModal";
 
 const Notes = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [newNote, setNewNote] = useState([]);
+  const [newNote, setNewNote] = useState([
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia repellat consequatur",
+    "Til hamet consectetur adipisicin Lorem ipsum dolororance",
+  ]);
 
   const handleAddNote = () => {
     setModalIsOpen(false);
@@ -40,8 +43,6 @@ const Notes = () => {
         <Image src={microphoneIcon} alt="microphone" />
         <p>Add Note</p>
       </button>
-
-      {/* Modal */}
     </div>
   );
 };
