@@ -12,7 +12,9 @@ export default function RootLayout({
   const pathname = usePathname();
   return (
     <html lang="en">
-      {pathname !== "/" && pathname !== "/dashboard" && <DashboardNav />}
+      {pathname !== "/" &&
+        pathname !== "/login" &&
+        pathname !== "/dashboard" && <DashboardNav />}
       <body className="">
         <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
       </body>

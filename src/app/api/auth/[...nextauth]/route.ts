@@ -1,7 +1,5 @@
 import NextAuth from "next-auth";
 import { NextAuthOptions } from "next-auth";
-import { Adapter } from "next-auth/adapters";
-import { prisma } from "@/lib/prismadb";
 import Credentials from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { env } from "@/lib/env";

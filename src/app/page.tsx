@@ -5,7 +5,7 @@ import Login from "@/components/auth/Login";
 import AuthImage from "@/components/responsiveImages/AuthImage";
 
 export default function Home() {
-  const { data: session, status } = useSession({
+  const { status, data: session } = useSession({
     required: true,
   });
 

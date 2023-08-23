@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { AuthLayoutProps } from "@/types/auth";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import SignUpForm from "../auth/SignUp";
 const DashboardLayout = ({
   LeftComponent,
   RightComponent,
+  status,
 }: AuthLayoutProps) => {
   const [isClicked, setIsClicked] = React.useState(false);
 
@@ -23,7 +25,11 @@ const DashboardLayout = ({
       <div className="max-w-[456px] flex-1">
         <div className="mx-20 mt-20">
           <Image src={logo} alt="logo" />
-          <h1 className="font-semibold text-xl my-8">Nice to see you again</h1>
+          <h1 className="font-semibold text-xl my-8">
+            {status === "unauthenticated"
+              ? "Hi there, let's dive back in!"
+              : "Nice to see you again"}
+          </h1>
         </div>
         <div>{isClicked ? <SignUpForm /> : LeftComponent}</div>
         {!isClicked ? (

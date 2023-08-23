@@ -13,7 +13,8 @@ import { signOut } from "next-auth/react";
 const DashboardNav: React.FC = () => {
   const signOutBtnHandler = async () => {
     await signOut({
-      callbackUrl: "/",
+      redirect: true,
+      callbackUrl: "/login",
     });
     console.log("sign out");
   };

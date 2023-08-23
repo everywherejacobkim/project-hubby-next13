@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 
 const DashboardHeader: React.FC = () => {
   const { status, data: session } = useSession();
-  console.log(`here:${status}`);
+
   return (
     <header className="bg-white py-4 font-poppins">
       <div className="container mx-auto px-4 flex justify-between items-center">
