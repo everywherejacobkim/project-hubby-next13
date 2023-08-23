@@ -1,12 +1,18 @@
+"use client";
 import { FiBell, FiUser } from "react-icons/fi";
-import CurrentWeather from "../location/CurrentWeather";
+import { useSession } from "next-auth/react";
 
 const DashboardHeader: React.FC = () => {
+  const { status, data: session } = useSession();
+  console.log(`here:${status}`);
   return (
     <header className="bg-white py-4 font-poppins">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="my-4">
-          <h1 className="text-black text-xl font-bold">Good morning, Jacob!</h1>
+          <h1 className="text-black text-xl font-bold">
+            Good morning,{" "}
+            {status === "authenticated" ? session?.user?.name : "..."}
+          </h1>
           <p className="text-sm mt-1">Let&apos;s make today productive!</p>
         </div>
         <div className="flex items-center space-x-4">
