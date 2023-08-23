@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 interface LoginFormProps {}
 
@@ -91,6 +92,11 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       <div>
         <button
           type="button"
+          onClick={() =>
+            signIn("google", {
+              callbackUrl: "/dashboard",
+            })
+          }
           className="flex justify-center items-center w-full bg-neutral-dark hover:bg-neutral-dark/95 text-black bg-gray-dark py-2 rounded"
         >
           <FcGoogle className="inline-block mr-2" />
