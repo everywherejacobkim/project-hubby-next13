@@ -6,29 +6,29 @@ import { env } from "@/lib/env";
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    Credentials({
-      name: "Credentials",
-      credentials: {
-        email: {
-          label: "Email",
-          type: "text",
-          placeholder: "admin@example.com",
-        },
-        password: { label: "Password", type: "password" },
-      },
-      authorize(credentials, req) {
-        if (
-          credentials?.email === "admin@example.com" &&
-          credentials.password === "admin"
-        ) {
-          return {
-            id: "1",
-            email: "admin@example.com",
-          };
-        }
-        return null;
-      },
-    }),
+    // Credentials({
+    //   name: "Credentials",
+    //   credentials: {
+    //     email: {
+    //       label: "Email",
+    //       type: "text",
+    //       placeholder: "admin@example.com",
+    //     },
+    //     password: { label: "Password", type: "password" },
+    //   },
+    //   authorize(credentials, req) {
+    //     if (
+    //       credentials?.email === "admin@example.com" &&
+    //       credentials.password === "admin"
+    //     ) {
+    //       return {
+    //         id: "1",
+    //         email: "admin@example.com",
+    //       };
+    //     }
+    //     return null;
+    //   },
+    // }),
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
