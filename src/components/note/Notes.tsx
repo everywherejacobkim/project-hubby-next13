@@ -1,19 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import Image from "next/image";
 import microphoneIcon from "../../../public/assets/icons/microphone.png";
 import NotesModal from "./NotesModal";
+import axios from "axios";
 
 const Notes = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [newNote, setNewNote] = useState([]);
+  const [newNote, setNewNote] = useState<string[]>([""]);
 
-  const handleAddNote = () => {
-    setModalIsOpen(false);
-  };
+  const handleAddNote = (e: FormEvent) => {
+    e.preventDefault();
 
-  const closeModal = () => {
-    setModalIsOpen(false);
+    axios
+      .post("/api/notes", { notes: newNote })
+      .then(() => {
+        setModalIsOpen(false);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   };
 
   return (
