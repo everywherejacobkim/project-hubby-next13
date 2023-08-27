@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../lib/prismadb";
-import getCurrentUser from "@/components/actions/getCurrentUser";
+import getCurrentUser from "@/components/auth/getCurrentUser";
 
 export async function POST(request: Request) {
   const currentUser = await getCurrentUser();
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
   });
   return NextResponse.json(note, { status: 201 });
 }
-  
+
 export const GET = async () => {
   try {
     const notes = await prisma.note.findMany();

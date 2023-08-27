@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { AuthLayoutProps } from "@/types/auth";
 import Image from "next/image";
 import logo from "../../../public/assets/images/svg/logo-hubby.svg";
@@ -10,7 +10,7 @@ const DashboardLayout = ({
   RightComponent,
   status,
 }: AuthLayoutProps) => {
-  const [isClicked, setIsClicked] = React.useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleSignUp = () => {
     setIsClicked(true);

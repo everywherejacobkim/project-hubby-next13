@@ -5,13 +5,13 @@ import Login from "@/components/auth/Login";
 import AuthImage from "@/components/responsiveImages/AuthImage";
 
 export default function Home() {
-  const { status, data: session } = useSession({
-    required: true,
-  });
+  // const { status, data: session } = useSession({
+  //   required: true,
+  // });
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
+  // if (status === "loading") {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <AuthLayout LeftComponent={<Login />} RightComponent={<AuthImage />} />

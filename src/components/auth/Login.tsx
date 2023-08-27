@@ -1,33 +1,48 @@
 "use client";
 import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 interface LoginFormProps {
   status?: string;
 }
 
+interface InitialStateProps {
+  email: string;
+  password: string;
+}
+
+const initialState: InitialStateProps = {
+  email: "",
+  password: "",
+};
+
 const LoginForm: React.FC<LoginFormProps> = ({ status }) => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
+  const [state, setState] = useState(initialState);
+  const router = useRouter();
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleRememberMeChange = () => {
-    setRememberMe(!rememberMe);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Need to add login logic here
+    signIn("credentials", {
+      ...state,
+      redirect: false,
+    }).then((callback) => {
+      if (callback?.ok) {
+        router.refresh();
+      }
+      if (callback?.error) {
+        throw new Error("Error signing in");
+      }
+    });
+    router.push("/dashboard");
   };
 
   return (
@@ -39,8 +54,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ status }) => {
         <input
           type="email"
           id="email"
-          value={email}
-          onChange={handleEmailChange}
+          name="email"
+          value={state.email}
+          onChange={handleChange}
           className="w-full px-3 py-2 border border-gray/40 rounded bg-gray/10"
           required
         />
@@ -52,13 +68,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ status }) => {
         <input
           type="password"
           id="password"
-          value={password}
-          onChange={handlePasswordChange}
+          name="password"
+          value={state.password}
+          onChange={handleChange}
           className="w-full px-3 py-2 border border-gray/40 rounded bg-gray/10"
           required
         />
       </div>
-      <div className="flex justify-between">
+      {/* <div className="flex justify-between">
         <div className="mb-4 flex items-center">
           <input
             type="checkbox"
@@ -79,17 +96,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ status }) => {
             Forgot password
           </a>
         </div>
+      </div> */}
+      <div className="my-4">
+        <button
+          type="submit"
+          className="w-full bg-primary-action hover:bg-primary-action/95 text-white py-2 rounded text-sm p-1"
+        >
+          Sign in
+        </button>
       </div>
-      <Link href="/dashboard">
-        <div className="my-4">
-          <button
-            type="submit"
-            className="w-full bg-primary-action hover:bg-primary-action/95 text-white py-2 rounded text-sm p-1"
-          >
-            Sign in
-          </button>
-        </div>
-      </Link>
       <hr className="custom-divider-1" />
       <div>
         <button
