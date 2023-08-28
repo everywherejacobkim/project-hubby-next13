@@ -49,7 +49,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ status }) => {
     <form onSubmit={handleFormSubmit} className="max-w-xs mx-auto rounded px-2">
       <div className="mb-4">
         <label htmlFor="email" className="block mb-2 text-sm pl-2">
-          Login
+          Email
         </label>
         <input
           type="email"

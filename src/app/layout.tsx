@@ -1,22 +1,20 @@
-"use client";
 import "./globals.css";
-import { usePathname } from "next/navigation";
-import DashboardNav from "@/components/nav/DashboardNav";
-import NextAuthSessionProvider from "./providers/sessionProvider";
+// import { usePathname } from "next/navigation";
+// import NextAuthSessionProvider from "./providers/sessionProvider";
+import getCurrentUser from "./actions/getCurrentUser";
+import DashboardHeader from "@/components/header/DashboardHeader";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
-      {pathname !== "/" &&
-        pathname !== "/login" &&
-        pathname !== "/dashboard" && <DashboardNav />}
       <body className="">
-        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+        <DashboardHeader currentUser={currentUser} />
+        {children}
       </body>
     </html>
   );

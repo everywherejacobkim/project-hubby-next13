@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import AuthLayout from "@/components/layout/AuthLayout";
-import Login from "@/components/auth/Login";
+import Login from "@/components/auth/LoginForm";
 import AuthImage from "@/components/responsiveImages/AuthImage";
 
 const LoginPage = () => {

@@ -1,3 +1,5 @@
+import DashboardLayout from "@/components/layout/DashboardLayout";
+import DashboardNav from "@/components/nav/DashboardNav";
 import GmailApiQuickStart from "@/components/gmail/GmailApiQuickStart";
 import React from "react";
 
@@ -5,10 +7,10 @@ type Props = {};
 
 const EmailPage = (props: Props) => {
   return (
-    <div>
-      <h1>This is Email Page</h1>
-      <GmailApiQuickStart />
-    </div>
+    <DashboardLayout
+      LeftMenuComponent={<DashboardNav />}
+      MainComponent={<GmailApiQuickStart />}
+    />
   );
 };
 

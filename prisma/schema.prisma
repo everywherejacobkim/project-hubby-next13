@@ -25,5 +25,5 @@ model Note {
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String    @db.ObjectId
 }
-
-
+  
+  

@@ -4,14 +4,14 @@ const prisma = new PrismaClient();
 
 export const createNote = async (
   content: string,
-  author: string,
+  user: string,
   authorEmail: string
 ) => {
   try {
     const note = await prisma.note.create({
       data: {
         content,
-        author: {
+        user: {
           connect: {
             email: authorEmail,
           },
