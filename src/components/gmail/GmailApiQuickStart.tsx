@@ -1,15 +1,5 @@
 'use client'
-
-
 import React, { useState, useEffect } from 'react';
-
-
-
-
-// const CLIENT_ID = '719390433566-169f1sca4us02k3rna4i7755103rlnp6.apps.googleusercontent.com'; // Replace with your actual Client ID
-// const API_KEY = 'AIzaSyAt4J-i_Eld0bUCTSkKXUA3xDbOqZVAb0U'; // Replace with your actual API Key
-// const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest';
-// const SCOPES = 'https://www.googleapis.com/auth/gmail.readonly';
 import { RequestInfo, RequestInit } from 'node-fetch';
 
 const fetch = (url: RequestInfo, init?: RequestInit) =>

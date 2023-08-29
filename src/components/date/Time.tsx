@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import { ColorRing } from "react-loader-spinner";
 
 const CurrentTime: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>(getCurrentTime());
@@ -50,7 +49,16 @@ const CurrentTime: React.FC = () => {
             {currentTime}
           </p>
         ) : (
-          <Skeleton count={2} />
+          <div className="flex justify-center -mt-4">
+            <ColorRing
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="blocks-loading"
+              wrapperClass="blocks-wrapper"
+              colors={["#5b8ee1", "#395cea", "#4749a4", "#3e56a9", "#7181ec"]}
+            />
+          </div>
         )}
       </div>
     </div>

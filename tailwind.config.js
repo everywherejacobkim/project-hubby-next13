@@ -18,6 +18,7 @@ module.exports = {
         "primary-dark": "#004491",
         "primary-action": "#2D75DD",
         "primary-border": "#ACC7FF",
+        "primary-warning": "#FF5449",
 
         neutral: "#5E5E62",
         "neutral-dark": "#0D0E11",

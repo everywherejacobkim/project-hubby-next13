@@ -1,35 +1,39 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 
 const NotesModal = ({
   modalIsOpen,
-  newNote,
-  setNewNote,
   handleAddNote,
+  handleChange,
+  state,
 }: {
   modalIsOpen: boolean;
-  newNote: Array<string>;
-  setNewNote: (newNote: Array<string>) => void;
-  handleAddNote: () => void;
+  handleAddNote: (e: FormEvent) => void;
+  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  state: any;
 }) => {
   return (
     <div>
       <div className={`modal ${modalIsOpen ? "block" : "hidden"}`}>
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-md w-1/2 h-1/2">
-            <form action="/dashboard" method="post">
+          <div className=" bg-white p-6 rounded-md w-1/2">
+            <form onSubmit={handleAddNote}>
               <textarea
-                value={newNote.join("\n")}
+                value={state.content}
                 rows={11}
-                onChange={(e) => setNewNote(e.target.value.split("\n"))}
-                className="p-2 w-full mb-2 rounded-md"
+                onChange={handleChange}
+                className="p-2 w-full mb-2 rounded-md border border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent "
               />
-              <input
-                type="submit"
-                name="submitNote"
-                value="Submit"
-                onClick={handleAddNote}
-                className="p-2 bg-primary-action text-white rounded-md"
-              />
+              <div className="flex justify-end gap-2">
+                <button className="px-4 py-2 bg-primary text-neutral rounded-md">
+                  Delete
+                </button>
+                <input
+                  type="submit"
+                  name="submitNote"
+                  value="Save"
+                  className="px-4 py-2 bg-primary-action text-white rounded-md"
+                />
+              </div>
             </form>
           </div>
         </div>
