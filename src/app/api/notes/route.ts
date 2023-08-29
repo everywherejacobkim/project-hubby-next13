@@ -19,24 +19,6 @@ export async function POST(request: Request) {
   return NextResponse.json(note, { status: 201 });
 }
 
-// export async function GET(req: Request, res: any) {
-//   try {
-//     const notes = await prisma.note.findMany({
-//       orderBy: {
-//         createdAt: "desc",
-//       },
-//     });
-//     const safeNotes = notes.map((note) => ({
-//       ...note,
-//       createdAt: note.createdAt.toISOString(),
-//     }));
-
-//     return safeNotes;
-//   } catch (err: any) {
-//     throw new Error(err);
-//   }
-// }
-
 export async function handler(req: Request, res: any) {
   if (req.method === "GET") {
     try {
