@@ -11,8 +11,10 @@ export default function RootLayout({
   const pathname = usePathname();
   return (
     <html lang="en">
-      {pathname !== "/" && pathname !== "/dashboard" && <DashboardNav />}
-      <body className="">{children}</body>
+         <body className="">{children}
+        {pathname !== "/" && pathname !== "/dashboard" && <DashboardNav />}
+        </body>
+      
     </html>
   );
 }
