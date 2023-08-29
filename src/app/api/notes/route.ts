@@ -1,43 +1,42 @@
-import prisma from "../../../libs/prismadb";
 import { NextResponse } from "next/server";
+import prisma from "../../../lib/prismadb";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
-export const POST = async (request: { json: () => Promise<any> }) => {
-  try {
-    const body = await request.json();
-    const { content, author, authorEmail } = body;
+export async function POST(request: Request) {
+  const currentUser = await getCurrentUser();
+  if (!currentUser) {
+    return null;
+  }
+  const body = await request.json();
+  const { content } = body;
 
-    // Ensure that the required data is present in the request body
-    if (!content || !author || !authorEmail) {
-      return NextResponse.json(
-        { message: "Missing required data in request body" },
-        { status: 400 }
-      );
+  const note = await prisma.note.create({
+    data: {
+      content: body.content,
+      userId: currentUser.id,
+    },
+  });
+  return NextResponse.json(note, { status: 201 });
+}
+
+export async function handler(req: Request, res: any) {
+  if (req.method === "GET") {
+    try {
+      const notes = await prisma.note.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+      const safeNotes = notes.map((note) => ({
+        ...note,
+        createdAt: note.createdAt.toISOString(),
+      }));
+      res.status(200).json(safeNotes);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    const newNote = await prisma.note.create({
-      data: { content },
-    });
-
-    // Return the newly created note with a 201 Created status
-    return NextResponse.json(newNote, { status: 201 });
-  } catch (error) {
-    console.error("Error creating note:", error);
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
+  } else {
+    res.status(405).json({ error: "Method Not Allowed" });
   }
-};
-
-export const GET = async () => {
-  try {
-    const notes = await prisma.note.findMany();
-    return NextResponse.json(notes);
-  } catch (error) {
-    console.error("Error getting notes:", error);
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
-  }
-};
+}

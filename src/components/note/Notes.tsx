@@ -1,40 +1,67 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import Image from "next/image";
 import microphoneIcon from "../../../public/assets/icons/microphone.png";
 import NotesModal from "./NotesModal";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
+interface InitialStateProps {
+  content: string;
+}
+
+const initialState: InitialStateProps = {
+  content: "",
+};
 
 const Notes = () => {
+  const [state, setState] = useState(initialState);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [newNote, setNewNote] = useState([
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia repellat consequatur",
-    "Til hamet consectetur adipisicin Lorem ipsum dolororance",
-  ]);
+  const [notes, setNotes] = useState([]);
 
-  const handleAddNote = () => {
-    setModalIsOpen(false);
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setState({ ...state, content: e.target.value });
   };
 
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const handleAddNote = (e: FormEvent) => {
+    e.preventDefault();
+    axios
+      .post("/api/notes", state)
+      .then(() => {
+        setModalIsOpen(false);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+    router.refresh();
   };
+
+  useEffect(() => {
+    async function loadNotes() {
+      try {
+        const response = await axios.get("/api/notes");
+        const data = response.data;
+        setNotes(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadNotes();
+  }, []);
 
   return (
     <div className="w-full h-full relative">
       <h1 className="font-semibold mb-4">Notes</h1>
       {/* Notes list */}
-      <div className="flex flex-col gap-2 p-2">
-        {newNote.map((note, index) => (
-          <div key={index} className=" bg-primary py-2 px-3 rounded-lg">
-            {note}
-          </div>
-        ))}
-      </div>
+      <div className="flex flex-col gap-2 p-2">{notes}</div>
       <NotesModal
         modalIsOpen={modalIsOpen}
-        newNote={newNote}
-        setNewNote={setNewNote}
         handleAddNote={handleAddNote}
+        handleChange={handleChange}
+        state={state}
       />
       <button
         onClick={() => setModalIsOpen(true)}

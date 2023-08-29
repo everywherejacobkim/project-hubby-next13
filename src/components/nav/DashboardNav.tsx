@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/assets/images/svg/logo-hubby.svg";
@@ -7,8 +8,17 @@ import Email from "../../../public/assets/icons/mail.png";
 import Settings from "../../../public/assets/icons/settings.png";
 import Darkmode from "../../../public/assets/icons/darkmode.png";
 import Logout from "../../../public/assets/icons/logout.png";
+import { signOut } from "next-auth/react";
 
 const DashboardNav: React.FC = () => {
+  const signOutBtnHandler = async () => {
+    await signOut({
+      redirect: true,
+      callbackUrl: "/login",
+    });
+    console.log("sign out");
+  };
+
   return (
     <nav className="bg-primary text-white h-full w-[235px] fixed top-0 left-0">
       <div className="flex flex-col h-full items-center text-black relative">
@@ -48,7 +58,10 @@ const DashboardNav: React.FC = () => {
             <Image src={Darkmode} alt="darkmode-icon" />
             <p className="mt-1">Dark mode</p>
           </button>
-          <button className="mb-6 flex items-center gap-3">
+          <button
+            onClick={signOutBtnHandler}
+            className="mb-6 flex items-center gap-3"
+          >
             <Image src={Logout} alt="logout-icon" />
             <p className="mt-1">Logout</p>
           </button>
