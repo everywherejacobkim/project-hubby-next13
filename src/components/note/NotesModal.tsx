@@ -1,16 +1,43 @@
-import React, { FormEvent } from "react";
+"use client";
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+
+interface InitialStateProps {
+  content: string;
+}
+
+const initialState: InitialStateProps = {
+  content: "",
+};
 
 const NotesModal = ({
   modalIsOpen,
-  newNote,
-  setNewNote,
-  handleAddNote,
+  setModalIsOpen,
 }: {
   modalIsOpen: boolean;
-  newNote: Array<string>;
-  setNewNote: (newNote: Array<string>) => void;
-  handleAddNote: (e: FormEvent) => void;
+  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const [state, setState] = useState(initialState);
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setState({ ...state, content: e.target.value });
+  };
+
+  const handleAddNote = (e: FormEvent) => {
+    e.preventDefault();
+    axios
+      .post("/api/notes", state)
+      .then(() => {
+        setModalIsOpen(false);
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+    router.refresh();
+  };
+
   return (
     <div>
       <div className={`modal ${modalIsOpen ? "block" : "hidden"}`}>
@@ -18,9 +45,9 @@ const NotesModal = ({
           <div className=" bg-white p-6 rounded-md w-1/2">
             <form onSubmit={handleAddNote}>
               <textarea
-                value={newNote.join("\n")}
+                value={state.content}
                 rows={11}
-                onChange={(e) => setNewNote(e.target.value.split("\n"))}
+                onChange={handleChange}
                 className="p-2 w-full mb-2 rounded-md border border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent "
               />
               <div className="flex justify-end gap-2">

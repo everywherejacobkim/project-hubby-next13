@@ -1,8 +1,8 @@
 import { FiBell, FiUser } from "react-icons/fi";
 
-const DashboardHeader: React.FC = ({ currentUser }) => {
+const DashboardHeader = ({ currentUser }: { currentUser: any }) => {
   return (
-    <header className="bg-white py-4 font-poppins xl:pl-60 2xl:pl-32">
+    <header className="bg-white py-4 font-poppins">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="my-4">
           <h1 className="text-black text-xl font-bold">

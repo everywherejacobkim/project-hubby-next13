@@ -4,10 +4,6 @@ import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-interface LoginFormProps {
-  status?: string;
-}
-
 interface InitialStateProps {
   email: string;
   password: string;
@@ -18,7 +14,7 @@ const initialState: InitialStateProps = {
   password: "",
 };
 
-const LoginForm: React.FC<LoginFormProps> = ({ status }) => {
+const LoginForm = () => {
   const [state, setState] = useState(initialState);
   const router = useRouter();
 
