@@ -1,43 +1,16 @@
-"use client";
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-
-interface InitialStateProps {
-  content: string;
-}
-
-const initialState: InitialStateProps = {
-  content: "",
-};
+import React, { ChangeEvent, FormEvent } from "react";
 
 const NotesModal = ({
   modalIsOpen,
-  setModalIsOpen,
+  handleAddNote,
+  handleChange,
+  state,
 }: {
   modalIsOpen: boolean;
-  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleAddNote: (e: FormEvent) => void;
+  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  state: any;
 }) => {
-  const [state, setState] = useState(initialState);
-  const router = useRouter();
-
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setState({ ...state, content: e.target.value });
-  };
-
-  const handleAddNote = (e: FormEvent) => {
-    e.preventDefault();
-    axios
-      .post("/api/notes", state)
-      .then(() => {
-        setModalIsOpen(false);
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-    router.refresh();
-  };
-
   return (
     <div>
       <div className={`modal ${modalIsOpen ? "block" : "hidden"}`}>
