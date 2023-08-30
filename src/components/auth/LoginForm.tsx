@@ -47,7 +47,7 @@ const LoginForm = () => {
   };
 
   const handleGoogleSignIn = () => {
-    signIn("google");
+    signIn("google", { callbackUrl: "http://localhost:3000/dashboard" });
   };
 
   return (
