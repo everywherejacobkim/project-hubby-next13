@@ -25,20 +25,24 @@ const LoginForm = () => {
     });
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signIn("credentials", {
-      ...state,
-      redirect: false,
-    }).then((callback) => {
+
+    try {
+      const callback = await signIn("credentials", {
+        ...state,
+        redirect: false,
+      });
+
       if (callback?.ok) {
         router.refresh();
+        router.push("/dashboard");
+      } else if (callback?.error) {
+        console.error("Error signing in:", callback.error);
       }
-      if (callback?.error) {
-        throw new Error("Error signing in");
-      }
-    });
-    router.push("/dashboard");
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+    }
   };
 
   return (

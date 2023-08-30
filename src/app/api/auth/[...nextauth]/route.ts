@@ -41,13 +41,10 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      clientId: env.GOOGLE_CLIENT_ID as string,
+      clientSecret: env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
-  pages: {
-    signIn: "/dashboard",
-  },
   debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
