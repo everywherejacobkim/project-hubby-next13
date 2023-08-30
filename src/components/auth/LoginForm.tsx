@@ -46,6 +46,10 @@ const LoginForm = () => {
     }
   };
 
+  const handleGoogleSignIn = () => {
+    signIn("google");
+  };
+
   return (
     <form onSubmit={handleFormSubmit} className="max-w-xs mx-auto rounded px-2">
       <div className="mb-4">
@@ -117,11 +121,7 @@ const LoginForm = () => {
       <div>
         <button
           type="button"
-          onClick={() =>
-            signIn("google", {
-              callbackUrl: "/dashboard",
-            })
-          }
+          onClick={handleGoogleSignIn}
           className="flex justify-center items-center w-full bg-neutral-dark hover:bg-neutral-dark/95 text-black bg-gray-dark py-2 rounded"
         >
           <FcGoogle className="inline-block mr-2" />
