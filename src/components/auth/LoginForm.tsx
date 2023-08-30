@@ -16,6 +16,7 @@ const initialState: InitialStateProps = {
 
 const LoginForm = () => {
   const [state, setState] = useState(initialState);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,11 +35,11 @@ const LoginForm = () => {
         redirect: false,
       });
 
-      if (callback?.ok) {
+      if (callback && !callback.error) {
         router.refresh();
         router.push("/dashboard");
       } else if (callback?.error) {
-        console.error("Error signing in:", callback.error);
+        setError("Please check your credentials and try again.");
       }
     } catch (error) {
       console.error("An unexpected error occurred:", error);
@@ -47,6 +48,13 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleFormSubmit} className="max-w-xs mx-auto rounded px-2">
+      <div className="mb-4">
+        {error && (
+          <div className="px-3 py-2 bg-red-500 text-white rounded text-sm">
+            {error}
+          </div>
+        )}
+      </div>
       <div className="mb-4">
         <label htmlFor="email" className="block mb-2 text-sm pl-2">
           Email
