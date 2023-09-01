@@ -30,24 +30,47 @@ export const authOptions: NextAuthOptions = {
         if (!user || !user?.hashedPassword) {
           throw new Error("Invalid credentials");
         }
-        const isCorrect = await bcrypt.compare(
+        const passwordMatch = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
         );
-        if (!isCorrect) {
+        if (!passwordMatch) {
           throw new Error("Invalid credentials");
         }
         return user;
       },
     }),
     GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      clientId: env.GOOGLE_CLIENT_ID as string,
+      clientSecret: env.GOOGLE_CLIENT_SECRET as string,
+
+      async profile(profile) {
+        return {
+          id: profile.id,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+
+      async authorize({ profile }: { profile: any }) {
+        const user = await prisma.user?.findUnique({
+          where: { email: profile.email },
+        });
+
+        if (!user) {
+          await prisma.user.create({
+            data: {
+              email: profile.email,
+              name: profile.name,
+              image: profile.picture,
+            },
+          });
+        }
+        return user;
+      },
     }),
   ],
-  pages: {
-    signIn: "/dashboard",
-  },
   debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",

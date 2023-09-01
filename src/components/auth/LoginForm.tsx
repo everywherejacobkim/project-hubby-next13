@@ -16,6 +16,7 @@ const initialState: InitialStateProps = {
 
 const LoginForm = () => {
   const [state, setState] = useState(initialState);
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,24 +26,39 @@ const LoginForm = () => {
     });
   };
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signIn("credentials", {
-      ...state,
-      redirect: false,
-    }).then((callback) => {
-      if (callback?.ok) {
+
+    try {
+      const callback = await signIn("credentials", {
+        ...state,
+        redirect: false,
+      });
+
+      if (callback && !callback.error) {
         router.refresh();
+        router.push("/dashboard");
+      } else if (callback?.error) {
+        setError("Please check your credentials and try again.");
       }
-      if (callback?.error) {
-        throw new Error("Error signing in");
-      }
-    });
-    router.push("/dashboard");
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+    }
+  };
+
+  const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "http://localhost:3000/dashboard" });
   };
 
   return (
     <form onSubmit={handleFormSubmit} className="max-w-xs mx-auto rounded px-2">
+      <div className="mb-4">
+        {error && (
+          <div className="px-3 py-2 bg-red-500 text-white rounded text-sm">
+            {error}
+          </div>
+        )}
+      </div>
       <div className="mb-4">
         <label htmlFor="email" className="block mb-2 text-sm pl-2">
           Email
@@ -105,11 +121,7 @@ const LoginForm = () => {
       <div>
         <button
           type="button"
-          onClick={() =>
-            signIn("google", {
-              callbackUrl: "/dashboard",
-            })
-          }
+          onClick={handleGoogleSignIn}
           className="flex justify-center items-center w-full bg-neutral-dark hover:bg-neutral-dark/95 text-black bg-gray-dark py-2 rounded"
         >
           <FcGoogle className="inline-block mr-2" />
