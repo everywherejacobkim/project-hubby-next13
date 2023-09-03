@@ -65,7 +65,7 @@ const TodoList: React.FC = () => {
       <div className="absolute flex w-full bottom-0">
         <input
           type="text"
-          className="border rounded p-3 w-full bg-primary"
+          className="border rounded p-3 w-full bg-white"
           placeholder="New task..."
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
