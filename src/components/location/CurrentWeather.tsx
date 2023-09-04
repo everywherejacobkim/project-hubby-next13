@@ -1,12 +1,10 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import clear from "../../../public/assets/icons/clear.png";
-import clearNight from "../../../public/assets/icons/clear_night.png";
-import clouds from "../../../public/assets/icons/fewClouds.png";
-import cloudsNight from "../../../public/assets/icons/fewCloud_night.png";
-import rain from "../../../public/assets/icons/rainy.png";
-import thunder from "../../../public/assets/icons/thunderstorm.png";
+import clear from "../../../public/assets/icons/day_sunny.png";
+import clouds from "../../../public/assets/icons/cloudy.png";
+import rain from "../../../public/assets/icons/rain.png";
+import dayCloudy from "../../../public/assets/icons/day_cloudy.png";
 
 interface Location {
   latitude: number;
@@ -68,10 +66,10 @@ const CurrentWeather: React.FC = () => {
     if (weather?.weather[0].main === "Clear" && parseInt(hours) >= 18) {
       return (
         <Image
-          src={clearNight}
+          src={clear}
           alt="clear night"
-          width={150}
-          height={150}
+          width={30}
+          height={30}
           className="object-fit"
         />
       );
@@ -80,8 +78,8 @@ const CurrentWeather: React.FC = () => {
         <Image
           src={clear}
           alt="clear"
-          width={150}
-          height={150}
+          width={30}
+          height={30}
           className="object-fit"
         />
       );
@@ -89,8 +87,8 @@ const CurrentWeather: React.FC = () => {
       <Image
         src={rain}
         alt="clear"
-        width={150}
-        height={150}
+        width={30}
+        height={30}
         className="object-fit"
       />;
     } else if (weather?.weather[0].main === "Clouds") {
@@ -98,28 +96,28 @@ const CurrentWeather: React.FC = () => {
         <Image
           src={clouds}
           alt="clear"
-          width={150}
-          height={150}
+          width={30}
+          height={20}
           className="object-fit"
         />
       );
     } else if (weather?.weather[0].main === "Clouds" && parseInt(hours) >= 18) {
       return (
         <Image
-          src={cloudsNight}
+          src={clouds}
           alt="clear"
-          width={150}
-          height={150}
+          width={30}
+          height={20}
           className="object-fit"
         />
       );
     } else if (weather?.weather[0].main === "Thunderstorm") {
       return (
         <Image
-          src={thunder}
+          src={dayCloudy}
           alt="clear"
-          width={150}
-          height={150}
+          width={30}
+          height={20}
           className="object-fit"
         />
       );
@@ -127,28 +125,22 @@ const CurrentWeather: React.FC = () => {
   }
 
   return (
-    <div className="flex w-full justify-between h-fit">
-      {weather ? (
+    <div className="flex gap-2 w-full justify-between h-fit">
+       <div className="h-fit pt-1">{renderWeatherImg()}</div>
+     {weather ? (
         <div>
-          <h1 className="font-semibold">{weather.name}</h1>
-          <div className="flex mt-8">
-            <p className="text-3xl font-semibold">
+          
+          <div className="flex">
+            
+            <p className="text-xl font-semibold">
               {Math.ceil(weather.main.temp)}°
             </p>
-            <div className="flex pl-3 pt-3">
-              <p> {weather.weather[0].main}</p>
-              <span className="pl-1">
-                {" "}
-                {Math.floor(weather.main.temp_max)}°
-              </span>
-              <span>/ {Math.floor(weather.main.temp_min)}°</span>
-            </div>
           </div>
         </div>
       ) : (
         "Loading..."
       )}
-      <div className="h-fit">{renderWeatherImg()}</div>
+     
     </div>
   );
 };

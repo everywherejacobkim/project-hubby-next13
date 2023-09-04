@@ -1,8 +1,10 @@
 import { FiBell, FiUser } from "react-icons/fi";
+import CurrentWeather from "../location/CurrentWeather";
+import CurrentDate from "../date/Date";
 
 const DashboardHeader = ({ currentUser }: { currentUser: any }) => {
   return (
-    <header className="bg-white py-4 font-poppins">
+    <header className="py-4 font-poppins">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="my-4">
           <h1 className="text-black text-xl font-bold">
@@ -10,16 +12,13 @@ const DashboardHeader = ({ currentUser }: { currentUser: any }) => {
           </h1>
           <p className="text-sm mt-1">Let&apos;s make today productive!</p>
         </div>
-        <div className="flex items-center space-x-4">
-          {/* Notification Bell Icon */}
-          <button className="text-black">
-            <FiBell size={24} />
-          </button>
-
-          {/* User Profile Button */}
-          <button className="bg-gray-200 rounded-full p-2">
-            <FiUser size={24} />
-          </button>
+        <div className="flex items-center space-x-4 shadow rounded-3xl py-2.5 px-7 bg-white">
+          <div>
+            <CurrentDate />
+          </div>
+         <div>
+          <CurrentWeather />
+         </div>
         </div>
       </div>
     </header>

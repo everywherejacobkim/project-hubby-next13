@@ -1,35 +1,26 @@
 import React from "react";
 import TodoList from "@/components/todoList/TodoList";
-import CurrentDate from "@/components/date/Date";
-import CurrentTime from "@/components/date/Time";
-import CurrentWeather from "@/components/location/CurrentWeather";
 import ChatGPT from "@/components/chatbot/ChatGpt";
 import PomodoroTimer from "@/components/timer/PomodoroTimer";
 import Notes from "@/components/note/Notes";
 
 const DashboardGrid: React.FC = () => {
   return (
-    <div className="grid grid-cols-6 gap-4 p-4 w-full h-full">
+    <div className="grid grid-cols-6 gap-4 p-4 w-full h-full bg-primary">
       {/* add each components in the gird */}
-      <div className="flex justify-center p-4 border border-neutral-border">
-        <CurrentTime />
+      <div className="flex justify-center col-span-4 p-4 row-span-2 border shadow-xl rounded-3xl bg-white	">
+  
       </div>
-      <div className="flex justify-center p-4 border border-neutral-border">
-        <CurrentDate />
-      </div>
-      <div className="flex justify-left col-span-2 p-4 border border-neutral-border">
-        <CurrentWeather />
-      </div>
-      <div className="flex justify-center col-span-2 row-span-2 p-4 border border-neutral-border">
+      <div className="flex justify-center col-span-2 row-span-2 p-4 border shadow-xl rounded-3xl bg-primary-action	">
         <PomodoroTimer initialPomodoro={0.2 * 60} initialBreak={0.1 * 60} />
       </div>
-      <div className="flex justify-center col-span-2 row-span-4 p-4 border border-neutral-border">
+      <div className="flex justify-center col-span-2 row-span-4 p-4 border shadow-xl rounded-3xl bg-white	">
         <Notes />
       </div>
-      <div className="flex justify-center col-span-2 row-span-4 p-4 border border-neutral-border">
+      <div className="flex justify-center col-span-2 row-span-4 p-4 border shadow-xl rounded-3xl bg-white	">
         <ChatGPT />
       </div>
-      <div className="flex justify-center col-span-2 row-span-3 p-4 border border-neutral-border">
+      <div className="flex justify-center col-span-2 row-span-3 p-4 border shadow-xl rounded-3xl	bg-white">
         <TodoList />
       </div>
     </div>

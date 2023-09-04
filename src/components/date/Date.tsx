@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+import calendar from "../../../public/assets/icons/calendar.png"
 
 const CurrentDate: React.FC = () => {
   const now = new Date();
@@ -36,10 +38,19 @@ const CurrentDate: React.FC = () => {
 
   return (
     <div className="w-full">
-      <h1 className="font-semibold">{daysToString()}</h1>
-      <div className="mt-8 flex gap-2 justify-center">
-        <span className="sm:text-3xl font-medium">{day_value} </span>
-        <span className="sm:text-3xl font-medium">{months[month_value]}</span>
+      <div className="flex gap-2 w-full justify-center">
+        <span className="h-fit">
+        <Image 
+        src={calendar}
+        alt="calendar icon" 
+        width={20}
+        height={20}
+        className="object-fit pt-1"
+        />
+       </span>
+        <span className="sm:text-xl font-medium">{months[month_value]}</span>
+        <span className="sm:text-xl font-medium">{day_value} </span>
+        <span className="text-neutral-light">|</span>
       </div>
     </div>
   );

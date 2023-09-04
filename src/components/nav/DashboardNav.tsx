@@ -20,7 +20,7 @@ const DashboardNav: React.FC = () => {
   };
 
   return (
-    <nav className="bg-primary text-white h-full w-[235px] fixed top-0 left-0">
+    <nav className="bg-white text-white h-full w-[235px] fixed top-0 left-0">
       <div className="flex flex-col h-full items-center text-black relative">
         <Link href="/">
           <div className="mt-12">
