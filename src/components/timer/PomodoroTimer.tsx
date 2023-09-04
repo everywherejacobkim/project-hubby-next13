@@ -68,25 +68,25 @@ const PomodoroTimer: React.FC<{
 
   return (
     <div className="w-full lg:-mb-8">
-      <h1 className="font-semibold">Pomodoro Timer</h1>
+      <h1 className="font-semibold text-white mb-2">Pomodoro Timer</h1>
       <div className="w-full h-[80%] flex flex-col gap-8 items-center justify-center">
         <div className="w-48 h-48">
           <div className="w-full h-full rounded-full border-8">
-            <div className="text-lg mt-2 text-center px-4 pt-8">
+            <div className="text-4xl font-bold text-center px-4 pt-14 text-white">
+              {formatTime(minutes)}:{formatTime(seconds)}
+            </div>
+            <div className="text-lg mt-2 text-center px-4 text-white">
               {isBreak
                 ? "Break"
                 : completedCycles === 0
                 ? "Focus"
                 : `#${completedCycles}`}
             </div>
-            <div className="text-4xl font-bold text-center px-4 pt-2 pb-6">
-              {formatTime(minutes)}:{formatTime(seconds)}
-            </div>
           </div>
         </div>
-        <div className="w-full -mb-6">
+        <div className="w-full -mt-4">
           {isRunning ? (
-            <div className="flex justify-between">
+            <div className="flex justify-between px-6">
               <button>
                 <Image src={stopIcon} alt="stop-icon" onClick={handleStop} />
               </button>
@@ -97,7 +97,7 @@ const PomodoroTimer: React.FC<{
           ) : (
             <button
               onClick={handleStartStop}
-              className="w-full p-3 bg-primary-action text-white rounded-lg"
+              className="w-full bg-primary-action text-white rounded-lg text-xl"
             >
               Start
             </button>
