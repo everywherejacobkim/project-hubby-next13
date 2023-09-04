@@ -16,11 +16,7 @@ const ChatGPT: React.FC = () => {
 
   return (
     <>
-      {showChat ? (
-        <ChatWindow switchToHistory={switchToHistory} />
-      ) : (
-        <ChatHistory switchToChat={switchToChat} />
-      )}
+      <ChatWindow switchToHistory={switchToHistory} />
     </>
   );
 };

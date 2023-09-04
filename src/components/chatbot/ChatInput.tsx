@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import { BsSend } from "react-icons/bs";
 
@@ -34,7 +34,7 @@ const ChatInput = ({ onSend, disabled }: InputProps) => {
       <button
         onClick={sendInput}
         disabled={disabled}
-        className="bg-primary-action absolute right-5 mt-1.5 p-3 rounded-lg"
+        className="bg-primary-action absolute right-3 mt-1.5 p-3 rounded-lg"
       >
         <BsSend className="text-white" />
       </button>

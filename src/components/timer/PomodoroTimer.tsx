@@ -67,8 +67,8 @@ const PomodoroTimer: React.FC<{
   };
 
   return (
-    <div className="w-full lg:-mb-8">
-      <h1 className="font-semibold text-white mb-2">Pomodoro Timer</h1>
+    <div className="w-full lg:-mb-6">
+      <h1 className="font-semibold text-white mb-3">Pomodoro Timer</h1>
       <div className="w-full h-[80%] flex flex-col gap-8 items-center justify-center">
         <div className="w-48 h-48">
           <div className="w-full h-full rounded-full border-8">
@@ -84,7 +84,7 @@ const PomodoroTimer: React.FC<{
             </div>
           </div>
         </div>
-        <div className="w-full -mt-4">
+        <div className="w-full">
           {isRunning ? (
             <div className="flex justify-between px-6">
               <button>
