@@ -53,7 +53,7 @@ const Notes = () => {
   }, []);
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full relative">
       <h1 className="font-semibold mb-4">Notes</h1>
       {/* Notes list */}
       <div className="flex flex-col gap-2 p-2">{notes}</div>
@@ -65,7 +65,7 @@ const Notes = () => {
       />
       <button
         onClick={() => setModalIsOpen(true)}
-        className="absolute flex justify-center gap-2 w-full bottom-0 mt-4 p-3 bg-primary-action text-white rounded-md"
+        className="absolute flex justify-center gap-2 w-full bottom-0 p-3 bg-primary-action text-white rounded-md"
       >
         <Image src={microphoneIcon} alt="microphone" />
         <p>Add Note</p>

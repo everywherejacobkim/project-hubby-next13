@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 // import { useTodoState } from "../../app/context/TodoContext";
 import TodoItem from "./TodoItem";
+import TodoImage from "../../../public/assets/images/svg/todo-bg.svg";
 
 interface Todo {
   id: number;
@@ -51,17 +53,23 @@ const TodoList: React.FC = () => {
   return (
     <div className="relative w-full">
       <h1 className="font-semibold mb-4">Your to-Do list</h1>
-      <ul>
-        {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            toggleTodo={toggleTodo}
-            updateTodoText={updateTodoText}
-            deleteTodo={deleteTodo}
-          />
-        ))}
-      </ul>
+      <div className="flex justify-center py-10">
+        {newTodo ? (
+          <ul>
+            {todos.map((todo) => (
+              <TodoItem
+                key={todo.id}
+                todo={todo}
+                toggleTodo={toggleTodo}
+                updateTodoText={updateTodoText}
+                deleteTodo={deleteTodo}
+              />
+            ))}
+          </ul>
+        ) : (
+          <Image src={TodoImage} alt="todo-image" />
+        )}
+      </div>
       <div className="absolute flex w-full bottom-0">
         <input
           type="text"
