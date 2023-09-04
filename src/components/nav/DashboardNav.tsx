@@ -27,28 +27,32 @@ const DashboardNav: React.FC = () => {
             <Image src={logo} alt="hubby" />
           </div>
         </Link>
-        <div className="flex flex-col mt-20">
+        <div className="flex flex-col mt-10">
           <Link href="/dashboard">
-            <button className="mb-6 flex items-center gap-3">
-              <Image src={Dashboard} alt="dashboard-icon" />
+            <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">
+              <Image
+                src={Dashboard}
+                alt="dashboard-icon"
+                className="bg-white"
+              />
               <p className="mt-1">Dashboard</p>
             </button>
           </Link>
           <Link href="/calendar">
-            <button className="mb-6 flex items-center gap-3">
-              <Image src={Calendar} alt="calendar-icon" />
+            <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">
+              <Image src={Calendar} alt="calendar-icon" className="bg-white" />
               <p className="mt-1">Calendar</p>
             </button>
           </Link>
           <Link href="/email">
-            <button className="mb-6 flex items-center gap-3">
-              <Image src={Email} alt="email-icon" />
+            <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">
+              <Image src={Email} alt="email-icon" className="bg-white" />
               <p className="mt-1">Email</p>
             </button>
           </Link>
           <Link href="/settings">
-            <button className="mb-6 flex items-center gap-3">
-              <Image src={Settings} alt="settings-icon" />
+            <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">
+              <Image src={Settings} alt="settings-icon" className="bg-white" />
               <p className="mt-1">Settings</p>
             </button>
           </Link>
