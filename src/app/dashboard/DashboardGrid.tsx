@@ -1,6 +1,6 @@
 import React from "react";
 import TodoList from "@/components/todoList/TodoList";
-import ChatGPT from "@/components/chatbot/ChatGpt";
+import ChatWindow from "@/components/chatbot/ChatWindow";
 import PomodoroTimer from "@/components/timer/PomodoroTimer";
 import Notes from "@/components/note/Notes";
 
@@ -18,7 +18,7 @@ const DashboardGrid: React.FC = () => {
         <Notes />
       </div>
       <div className="flex justify-center col-span-2 row-span-4 p-4 border shadow-xl rounded-3xl bg-white">
-        <ChatGPT />
+        <ChatWindow />
       </div>
       <div className="flex justify-center col-span-2 row-span-3 p-4 border shadow-xl rounded-3xl	bg-white">
         <TodoList />
