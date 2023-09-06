@@ -1,9 +1,39 @@
+import {
+  ChatGPTMessage,
+  OpenAIStream,
+  OpenAIStreamPayload,
+} from "@/lib/openai-stream";
+import { MessageArraySchema } from "@/lib/validators/message";
+
 export async function POST(req: Request, res: Response) {
-  const { body } = req;
-  const { message } = body;
+  const { messages } = await req.json();
 
-  const chat = await Chat.create({ message });
+  const parsedMessages = MessageArraySchema.parse(messages);
 
-  res.status(200).json({ chat });
+  const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
+    return {
+      role: message.isUserMessage ? "user" : "system",
+      content: message.text,
+    };
+  });
+  outboundMessages.unshift({
+    role: "system",
+    content: "Hello! Ask anything",
+  });
+
+  const payload: OpenAIStreamPayload = {
+    model: "gpt-3.5-turbo",
+    messages: outboundMessages,
+    temperature: 0.4,
+    top_p: 1,
+    n: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    max_tokens: 150,
+    stream: true,
+  };
+
+  const stream = await OpenAIStream(payload);
+
+  return new Response(stream);
 }
-
