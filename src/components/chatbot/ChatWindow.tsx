@@ -35,7 +35,7 @@ const ChatWindow = () => {
 
     setMessages([...messagesRef.current, myMessage]);
 
-    const response = await fetch("/api/chat/generate-response", {
+    const response = await fetch("/api/chat", {
       method: "POST",
       body: JSON.stringify({ prompt: input }),
     }).then((response) => response.json());
