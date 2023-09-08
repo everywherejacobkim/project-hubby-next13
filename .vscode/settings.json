@@ -6,6 +6,7 @@
     "Pomodoro",
     "prismadb",
     "Roboto",
-    "todos"
+    "todos",
+    "zustand"
   ]
 }

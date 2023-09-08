@@ -7,10 +7,6 @@ import ChatBot from "../../../public/assets/images/svg/chat-bot.svg";
 import ChatBotText from "../../../public/assets/images/svg/chat-bot-hello.svg";
 import newScreenIcon from "../../../public/assets/icons/newscreen.png";
 
-interface ChatProps {
-  switchToHistory: () => void;
-}
-
 enum Creator {
   Me = 0,
   Bot = 1,
@@ -22,7 +18,7 @@ interface MessageProps {
   key: number;
 }
 
-const ChatWindow: React.FC<ChatProps> = ({ switchToHistory }) => {
+const ChatWindow = () => {
   const [messages, setMessages] = useState<MessageProps[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -39,7 +35,7 @@ const ChatWindow: React.FC<ChatProps> = ({ switchToHistory }) => {
 
     setMessages([...messagesRef.current, myMessage]);
 
-    const response = await fetch("/api/chat/generate-response", {
+    const response = await fetch("/api/chat", {
       method: "POST",
       body: JSON.stringify({ prompt: input }),
     }).then((response) => response.json());

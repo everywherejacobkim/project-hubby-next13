@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useTimerCycleStore } from "@/lib/stores/TimerCycle";
 import pauseIcon from "../../../public/assets/icons/pause-timer.png";
 import stopIcon from "../../../public/assets/icons/stop-timer.png";
 
@@ -11,9 +12,10 @@ const PomodoroTimer: React.FC<{
   const [time, setTime] = useState(initialPomodoro);
   const [breakTime, setBreakTime] = useState(initialBreak);
   const [isBreak, setIsBreak] = useState(false);
-  const [completedCycles, setCompletedCycles] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  const { completedCycles, setCompletedCycles }: any = useTimerCycleStore(); //zustand
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -45,6 +47,7 @@ const PomodoroTimer: React.FC<{
     isRunning,
     isPaused,
     initialPomodoro,
+    setCompletedCycles,
   ]);
 
   const minutes = Math.floor(time / 60);
