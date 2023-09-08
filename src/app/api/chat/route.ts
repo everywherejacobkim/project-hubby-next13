@@ -1,39 +1,31 @@
-import {
-  ChatGPTMessage,
-  OpenAIStream,
-  OpenAIStreamPayload,
-} from "@/lib/openai-stream";
-import { MessageArraySchema } from "@/lib/validators/message";
+import { OpenAIEdgeStream } from "openai-edge-stream";
 
-export async function POST(req: Request, res: Response) {
-  const { messages } = await req.json();
+export const config = {
+  runtime: "edge",
+};
 
-  const parsedMessages = MessageArraySchema.parse(messages);
-
-  const outboundMessages: ChatGPTMessage[] = parsedMessages.map((message) => {
-    return {
-      role: message.isUserMessage ? "user" : "system",
-      content: message.text,
-    };
-  });
-  outboundMessages.unshift({
-    role: "system",
-    content: "Hello! Ask anything",
-  });
-
-  const payload: OpenAIStreamPayload = {
-    model: "gpt-3.5-turbo",
-    messages: outboundMessages,
-    temperature: 0.4,
-    top_p: 1,
-    n: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
-    max_tokens: 150,
-    stream: true,
-  };
-
-  const stream = await OpenAIStream(payload);
-
-  return new Response(stream);
+export default async function handler(req: {
+  json: PromiseLike<{ messages: any }> | { messages: any };
+}) {
+  try {
+    const { message }: any = await req.json;
+    const stream = await OpenAIEdgeStream(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+        method: "POST",
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ content: message, role: "user" }],
+          stream: true,
+        }),
+      }
+    );
+    return new Response(stream);
+  } catch (e) {
+    console.error(e);
+  }
 }

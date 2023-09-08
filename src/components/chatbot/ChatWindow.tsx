@@ -1,56 +1,42 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import ChatBot from "../../../public/assets/images/svg/chat-bot.svg";
 import ChatBotText from "../../../public/assets/images/svg/chat-bot-hello.svg";
 import newScreenIcon from "../../../public/assets/icons/newscreen.png";
+import { streamReader } from "openai-edge-stream";
 
-enum Creator {
-  Me = 0,
-  Bot = 1,
-}
-
-interface MessageProps {
-  text: string;
-  from: Creator;
-  key: number;
+interface Conversation {
+  role: string;
+  content: string;
 }
 
 const ChatWindow = () => {
-  const [messages, setMessages] = useState<MessageProps[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const messagesRef = useRef<MessageProps[]>([]);
-
-  const callApi = async (input: string) => {
-    setLoading(true);
-
-    const myMessage: MessageProps = {
-      text: input,
-      from: Creator.Me,
-      key: new Date().getTime(),
-    };
-
-    setMessages([...messagesRef.current, myMessage]);
-
-    const response = await fetch("/api/chat", {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Message text: ", value);
+    const response = await fetch(`/api/chat`, {
       method: "POST",
-      body: JSON.stringify({ prompt: input }),
-    }).then((response) => response.json());
-    setLoading(false);
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: value }),
+    });
 
-    if (response.text) {
-      const botMessage: MessageProps = {
-        text: response.text,
-        from: Creator.Bot,
-        key: new Date().getTime(),
-      };
-      setMessages([...messagesRef.current, botMessage]);
-    } else {
-      console.log("Error");
+    const data = response.data;
+    if (!data) {
+      return;
     }
+    const reader = data.getReader();
+    await streamReader(reader, (message) => {
+      console.log("Message: ", message);
+    });
+    setIsLoading(false);
   };
 
   return (
@@ -60,19 +46,23 @@ const ChatWindow = () => {
         <Image src={newScreenIcon} alt="screen-icon" />
       </div>
       <div className="p-4">
-        {loading ? (
-          messages.map((msg: MessageProps) => (
-            <ChatMessage key={msg.key} text={msg.text} from={msg.from} />
-          ))
-        ) : (
+        {!isLoading ? (
           <div className="flex flex-col items-center gap-4 pt-4">
             <Image src={ChatBot} alt="chat-bot-icon" />
             <Image src={ChatBotText} alt="chat-bot-text-icon" />
           </div>
+        ) : (
+          <div className="flex flex-col items-center gap-4 pt-4">Hello</div>
         )}
       </div>
       <div className="absolute bottom-0 w-full">
-        <ChatInput onSend={(input) => callApi(input)} disabled={loading} />
+        <ChatInput
+          handleSubmit={handleSubmit}
+          value={value}
+          setValue={setValue}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       </div>
     </div>
   );
