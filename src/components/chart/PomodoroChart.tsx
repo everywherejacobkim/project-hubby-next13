@@ -8,60 +8,84 @@ const PomodoroChart = () => {
   const [chart, setChart] = useState(null);
   const { completedCycles, setCompletedCycles }: any = useTimerCycleStore(); //zustand
 
+  const currentDate = new Date();
+  const options = {
+    month: "short",
+    day: "numeric",
+  };
+  const formattedDate = currentDate.toLocaleDateString("en-US", options);
+
   useEffect(() => {
     if (canvasRef.current && !chart) {
       const ctx = canvasRef.current.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
       if (ctx) {
         const pomodoroChart = new Chart(ctx, {
           type: "line",
           data: {
-            labels: Array.from({ length: completedCycles }, (_, i) => i + 1),
+            labels: [formattedDate],
             datasets: [
               {
                 label: "Pomodoro Completed",
-                data: Array.from({ length: completedCycles }, (_, i) => i),
-                backgroundColor: "rgba(75, 192, 192, 0.2)",
-                borderColor: "rgba(75, 192, 192, 1)",
+                data: [completedCycles], // Use an array here with a single data point
+                backgroundColor: gradient, // Assign the gradient directly
+                borderColor: "#2D75DD",
                 borderWidth: 2,
                 fill: true,
               },
             ],
           },
           options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
             scales: {
               y: {
                 beginAtZero: true,
                 title: {
-                  display: true,
+                  display: false,
                   text: "Pomodoro Completed",
+                },
+                stacked: true,
+                grace: "10%",
+                ticks: {
+                  precision: 0,
                 },
               },
               x: {
                 title: {
-                  display: true,
-                  text: "Pomodoro Number",
+                  display: false,
+                  text: "Date",
                 },
+                stacked: true,
               },
             },
           },
         });
-
+        gradient.addColorStop(0, "rgba(45,117,221,0.5)");
+        gradient.addColorStop(1, "rgba(255,255,255,1)");
         setChart(pomodoroChart);
       }
     }
-  }, [completedCycles, chart]);
+  }, [completedCycles]);
 
   useEffect(() => {
     if (chart) {
-      chart.data?.labels.push(completedCycles);
-      chart.data?.datasets[0].data.push(completedCycles);
+      chart.data.labels.push(formattedDate); // Push the formatted date
+      chart.data.datasets[0].data.push(completedCycles);
       chart.update();
     }
-  }, [chart, completedCycles]);
+  }, [completedCycles, formattedDate]);
 
   return (
-    <div>
-      <canvas ref={canvasRef} className="w-full h-auto"></canvas>
+    <div className="w-full h-fit -mb-20">
+      <div className="flex justify-between pl-1">
+        <h1 className="font-semibold">Focus hours Summary</h1>
+      </div>
+      <canvas ref={canvasRef} className="w-full h-auto pb-10 pt-5"></canvas>
     </div>
   );
 };
