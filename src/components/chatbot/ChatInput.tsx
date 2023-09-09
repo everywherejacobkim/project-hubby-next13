@@ -1,44 +1,27 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 import { BsSend } from "react-icons/bs";
 
-interface InputProps {
-  onSend: (text: string) => void;
-  disabled: boolean;
-}
-
-const ChatInput = ({ onSend, disabled }: InputProps) => {
-  const [Input, setInput] = useState("");
-
-  const sendInput = () => {
-    onSend(Input);
-    setInput("");
-  };
-
-  const handleKeyEnter = (event: any) => {
-    if (event.key === "Enter") {
-      sendInput();
-    }
-  };
-
+const ChatInput = ({
+  handleSubmit,
+  inputValue,
+  setInputValue,
+}: {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  inputValue: string;
+  setInputValue: (input: string) => void;
+}) => {
   return (
-    <div className="flex">
+    <form className="flex" onSubmit={handleSubmit}>
       <input
         type="text"
-        value={Input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => handleKeyEnter(e)}
-        disabled={disabled}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
         className="w-full border border-neutral-border p-3 rounded-lg mr-2"
       />
-      <button
-        onClick={sendInput}
-        disabled={disabled}
-        className="bg-primary-action absolute right-3 mt-1.5 p-3 rounded-lg"
-      >
+      <button className="bg-primary-action absolute right-4 mt-1.5 p-3 rounded">
         <BsSend className="text-white" />
       </button>
-    </div>
+    </form>
   );
 };
 
