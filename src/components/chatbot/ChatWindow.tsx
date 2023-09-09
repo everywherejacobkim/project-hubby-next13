@@ -1,67 +1,113 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import ChatMessage from "./ChatMessage";
+import axios from "axios";
 import ChatInput from "./ChatInput";
 import ChatBot from "../../../public/assets/images/svg/chat-bot.svg";
 import ChatBotText from "../../../public/assets/images/svg/chat-bot-hello.svg";
 import newScreenIcon from "../../../public/assets/icons/newscreen.png";
-import { streamReader } from "openai-edge-stream";
 
-interface Conversation {
-  role: string;
-  content: string;
+interface ChatMessage {
+  type: "user" | "assistant";
+  message: string;
 }
 
 const ChatWindow = () => {
-  const [value, setValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [chatLog, setChatLog] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log("Message text: ", value);
-    const response = await fetch(`/api/chat`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: value }),
-    });
-
-    const data = response.data;
-    if (!data) {
-      return;
-    }
-    const reader = data.getReader();
-    await streamReader(reader, (message) => {
-      console.log("Message: ", message);
-    });
-    setIsLoading(false);
+    setChatLog((prevChatLog: ChatMessage[]) => [
+      ...prevChatLog,
+      { type: "user", message: inputValue },
+    ]);
+    ``;
+    sendMessage(inputValue);
+    setInputValue("");
   };
+
+  const sendMessage = async (message: string) => {
+    const url = "https://api.openai.com/v1/chat/completions";
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`,
+    };
+    const data = {
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: message }],
+    };
+
+    try {
+      setIsLoading(true);
+      const res = await axios.post(url, data, { headers: headers });
+      setChatLog((prevChatLog: ChatMessage[]) => [
+        ...prevChatLog,
+        { type: "assistant", message: res.data.choices[0].message.content },
+      ]);
+    } catch (err) {
+      console.log("Send Message error: ", err);
+    }
+  };
+
+  // If there are no Axios calls after 1 minutes, change to bot image
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    const resetLoading = () => {
+      setIsLoading(false);
+    };
+
+    timeoutId = setTimeout(resetLoading, 600000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [chatLog]);
 
   return (
     <div className="relative w-full p-1 bg-white max-h-screen overflow-x-hidden">
       <div className="flex justify-between pr-1">
         <h1 className="font-semibold">ChatGPT</h1>
-        <Image src={newScreenIcon} alt="screen-icon" />
+        <a href="https://chat.openai.com" target="_blank">
+          <Image src={newScreenIcon} alt="screen-icon" />
+        </a>
       </div>
       <div className="p-4">
-        {!isLoading ? (
+        {isLoading ? (
+          <div className="flex flex-col gap-4 pt-4">
+            {chatLog.map((message, index) => (
+              <div
+                key={index}
+                className={`flex ${
+                  message.type === "user" ? "justify-end" : "justify-start"
+                }`}
+              >
+                {message.type === "assistant" && <Image />}
+                <div
+                  className={`${
+                    message.type === "user"
+                      ? "bg-primary-action px-3 py-2 w-2/3 rounded-lg text-white"
+                      : "bg-neutral-chat px-3 py-2 w-2/3 rounded-lg"
+                  }`}
+                >
+                  {message.message}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
           <div className="flex flex-col items-center gap-4 pt-4">
             <Image src={ChatBot} alt="chat-bot-icon" />
             <Image src={ChatBotText} alt="chat-bot-text-icon" />
           </div>
-        ) : (
-          <div className="flex flex-col items-center gap-4 pt-4">Hello</div>
         )}
       </div>
       <div className="absolute bottom-0 w-full">
         <ChatInput
           handleSubmit={handleSubmit}
-          value={value}
-          setValue={setValue}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
         />
       </div>
     </div>
