@@ -51,9 +51,9 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-h-[400px]">
       <h1 className="font-semibold mb-4">Your to-Do list</h1>
-      <div className="flex justify-center py-10">
+      <div className="flex justify-center py-14">
         {newTodo ? (
           <ul>
             {todos.map((todo) => (
@@ -70,7 +70,7 @@ const TodoList: React.FC = () => {
           <Image src={TodoImage} alt="todo-image" />
         )}
       </div>
-      <div className="absolute flex w-full bottom-0">
+      <div className="flex w-full">
         <input
           type="text"
           className="border rounded p-3 w-full bg-white"

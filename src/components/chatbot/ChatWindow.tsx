@@ -6,6 +6,8 @@ import ChatInput from "./ChatInput";
 import ChatBot from "../../../public/assets/images/svg/chat-bot.svg";
 import ChatBotText from "../../../public/assets/images/svg/chat-bot-hello.svg";
 import newScreenIcon from "../../../public/assets/icons/newscreen.png";
+import aiIcon from "../../../public/assets/icons/chat-ai.png";
+import copyIcon from "../../../public/assets/icons/chat-copy.png";
 
 interface ChatMessage {
   type: "user" | "assistant";
@@ -58,15 +60,32 @@ const ChatWindow = () => {
       setIsLoading(false);
     };
 
-    timeoutId = setTimeout(resetLoading, 600000);
+    timeoutId = setTimeout(resetLoading, 60000);
 
     return () => {
       clearTimeout(timeoutId);
     };
   }, [chatLog]);
 
+  const copyTextToClipboard = () => {
+    const textToCopy = document.getElementById("textToCopy");
+
+    if (textToCopy) {
+      const text = textToCopy.innerText;
+
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          alert("Content copied!");
+        })
+        .catch((err) => {
+          console.error("Copy failed: ", err);
+        });
+    }
+  };
+
   return (
-    <div className="relative w-full p-1 bg-white max-h-screen overflow-x-hidden">
+    <div className="relative w-full p-1 bg-white max-h-[400px] overflow-x-hidden">
       <div className="flex justify-between pr-1">
         <h1 className="font-semibold">ChatGPT</h1>
         <a href="https://chat.openai.com" target="_blank">
@@ -79,20 +98,37 @@ const ChatWindow = () => {
             {chatLog.map((message, index) => (
               <div
                 key={index}
-                className={`flex ${
+                className={`flex  ${
                   message.type === "user" ? "justify-end" : "justify-start"
                 }`}
               >
-                {message.type === "assistant" && <Image />}
-                <div
-                  className={`${
-                    message.type === "user"
-                      ? "bg-primary-action px-3 py-2 w-2/3 rounded-lg text-white"
-                      : "bg-neutral-chat px-3 py-2 w-2/3 rounded-lg"
-                  }`}
-                >
-                  {message.message}
-                </div>
+                {message.type === "user" && (
+                  <div className="bg-primary-action px-3 py-2 w-2/3 rounded-lg text-white">
+                    {message.message}
+                  </div>
+                )}
+                {message.type === "assistant" && (
+                  <div className="flex flex-col gap-1">
+                    <div>
+                      <Image src={aiIcon} alt="ai-icon" />
+                    </div>
+                    <div
+                      id="textToCopy"
+                      className="bg-neutral-light px-3 py-2 w-2/3 rounded-lg"
+                    >
+                      {message.message}
+                    </div>
+                    <div className="flex gap-2">
+                      <Image
+                        src={copyIcon}
+                        alt="copy-icon"
+                        className="opacity-40 cursor-pointer"
+                        onClick={copyTextToClipboard}
+                      />
+                      <p className="text-xs opacity-40">Copy</p>
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -103,7 +139,7 @@ const ChatWindow = () => {
           </div>
         )}
       </div>
-      <div className="absolute bottom-0 w-full">
+      <div className="w-full pt-1">
         <ChatInput
           handleSubmit={handleSubmit}
           inputValue={inputValue}

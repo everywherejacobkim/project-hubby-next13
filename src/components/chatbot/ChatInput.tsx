@@ -18,7 +18,7 @@ const ChatInput = ({
         onChange={(e) => setInputValue(e.target.value)}
         className="w-full border border-neutral-border p-3 rounded-lg mr-2"
       />
-      <button className="bg-primary-action absolute right-3 mt-1.5 p-3 rounded-lg">
+      <button className="bg-primary-action absolute right-4 mt-1.5 p-3 rounded">
         <BsSend className="text-white" />
       </button>
     </form>
