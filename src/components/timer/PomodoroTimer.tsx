@@ -89,7 +89,7 @@ const PomodoroTimer: React.FC<{
         </div>
         <div className="w-full">
           {isRunning ? (
-            <div className="flex justify-between px-6">
+            <div className="flex h-12 justify-between px-6">
               <button>
                 <Image src={stopIcon} alt="stop-icon" onClick={handleStop} />
               </button>
@@ -100,7 +100,7 @@ const PomodoroTimer: React.FC<{
           ) : (
             <button
               onClick={handleStartStop}
-              className="w-full bg-primary-action text-white rounded-lg text-xl"
+              className="w-full h-12 bg-primary-action text-white rounded-lg text-xl"
             >
               Start
             </button>

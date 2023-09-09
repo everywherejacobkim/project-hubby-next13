@@ -81,11 +81,11 @@ const PomodoroChart = () => {
   }, [completedCycles, formattedDate]);
 
   return (
-    <div className="w-full h-fit -mb-20">
+    <div className="w-full max-h-[350px]">
       <div className="flex justify-between pl-1">
         <h1 className="font-semibold">Focus hours Summary</h1>
       </div>
-      <canvas ref={canvasRef} className="w-full h-auto pb-10 pt-5"></canvas>
+      <canvas ref={canvasRef} className="w-full max-h-[300px] pt-2"></canvas>
     </div>
   );
 };
