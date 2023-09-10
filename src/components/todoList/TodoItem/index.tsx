@@ -39,8 +39,8 @@ const TodoItem: React.FC<TodoItemProps> = ({
   };
 
   return (
-    <li className="flex items-center justify-between mb-2 p-2 bg-white rounded">
-      <div className="flex items-center">
+    <li className="flex justify-between mb-2 p-2">
+      <div className="flex">
         <label className="flex items-center cursor-pointer">
           <input
             type="checkbox"
@@ -48,7 +48,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
             onChange={() => toggleTodo(todo.id)}
             className="hidden"
           />
-          <div className="w-6 h-6 rounded-full border border-black flex items-center justify-center bg-white mr-2">
+          <div className="w-6 h-6 rounded-full border border-primary-action flex items-center justify-center bg-white mr-2">
             {todo.completed && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"

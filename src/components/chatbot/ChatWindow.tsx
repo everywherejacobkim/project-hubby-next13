@@ -85,66 +85,68 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className="relative w-full p-1 bg-white max-h-[400px] overflow-x-hidden">
+    <div className="w-full bg-white overflow-x-hidden">
       <div className="flex justify-between pr-1">
         <h1 className="font-semibold">ChatGPT</h1>
         <a href="https://chat.openai.com" target="_blank">
           <Image src={newScreenIcon} alt="screen-icon" />
         </a>
       </div>
-      <div className="p-4">
-        {isLoading ? (
-          <div className="flex flex-col gap-4 pt-4">
-            {chatLog.map((message, index) => (
-              <div
-                key={index}
-                className={`flex  ${
-                  message.type === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                {message.type === "user" && (
-                  <div className="bg-primary-action px-3 py-2 w-2/3 rounded-lg text-white">
-                    {message.message}
-                  </div>
-                )}
-                {message.type === "assistant" && (
-                  <div className="flex flex-col gap-1">
-                    <div>
-                      <Image src={aiIcon} alt="ai-icon" />
-                    </div>
-                    <div
-                      id="textToCopy"
-                      className="bg-neutral-light px-3 py-2 w-2/3 rounded-lg"
-                    >
+      <div className="flex flex-col justify-between">
+        <div>
+          {isLoading ? (
+            <div className="flex flex-col gap-4 pt-4">
+              {chatLog.map((message, index) => (
+                <div
+                  key={index}
+                  className={`flex  ${
+                    message.type === "user" ? "justify-end" : "justify-start"
+                  }`}
+                >
+                  {message.type === "user" && (
+                    <div className="bg-primary-action px-3 py-2 w-2/3 rounded-lg text-white">
                       {message.message}
                     </div>
-                    <div className="flex gap-2">
-                      <Image
-                        src={copyIcon}
-                        alt="copy-icon"
-                        className="opacity-40 cursor-pointer"
-                        onClick={copyTextToClipboard}
-                      />
-                      <p className="text-xs opacity-40">Copy</p>
+                  )}
+                  {message.type === "assistant" && (
+                    <div className="flex flex-col gap-1">
+                      <div>
+                        <Image src={aiIcon} alt="ai-icon" />
+                      </div>
+                      <div
+                        id="textToCopy"
+                        className="bg-neutral-light px-3 py-2 w-2/3 rounded-lg"
+                      >
+                        {message.message}
+                      </div>
+                      <div className="flex gap-2">
+                        <Image
+                          src={copyIcon}
+                          alt="copy-icon"
+                          className="opacity-40 cursor-pointer"
+                          onClick={copyTextToClipboard}
+                        />
+                        <p className="text-xs opacity-40">Copy</p>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center gap-4 pt-4">
-            <Image src={ChatBot} alt="chat-bot-icon" />
-            <Image src={ChatBotText} alt="chat-bot-text-icon" />
-          </div>
-        )}
-      </div>
-      <div className="w-full pt-1">
-        <ChatInput
-          handleSubmit={handleSubmit}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-        />
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-4 pt-4">
+              <Image src={ChatBot} alt="chat-bot-icon" />
+              <Image src={ChatBotText} alt="chat-bot-text-icon" />
+            </div>
+          )}
+        </div>
+        <div className="w-full">
+          <ChatInput
+            handleSubmit={handleSubmit}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
+          />
+        </div>
       </div>
     </div>
   );
