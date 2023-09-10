@@ -53,7 +53,7 @@ const Notes = () => {
   }, []);
 
   return (
-    <div className="w-full max-h-[400px] relative">
+    <div className="w-full relative">
       <h1 className="font-semibold mb-4">Notes</h1>
       {/* Notes list */}
       <div className="flex flex-col gap-2 p-2">{notes}</div>

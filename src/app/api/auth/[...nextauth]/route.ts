@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
@@ -10,7 +10,7 @@ import { env } from "@/lib/env";
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    Credentials({
+    CredentialsProvider({
       credentials: {
         email: {
           label: "Email",
@@ -46,7 +46,7 @@ export const authOptions: NextAuthOptions = {
 
       async profile(profile) {
         return {
-          id: profile.id,
+          id: profile.sub,
           name: profile.name,
           email: profile.email,
           image: profile.picture,
@@ -54,13 +54,14 @@ export const authOptions: NextAuthOptions = {
       },
 
       async authorize({ profile }: { profile: any }) {
-        const user = await prisma.user?.findUnique({
+        const user = await prisma.user.findUnique({
           where: { email: profile.email },
         });
 
         if (!user) {
           await prisma.user.create({
             data: {
+              id: profile.sub,
               email: profile.email,
               name: profile.name,
               image: profile.picture,
@@ -71,7 +72,11 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  debug: process.env.NODE_ENV === "development",
+  callbacks: {
+    async session({ session }) {
+      return session;
+    },
+  },
   session: {
     strategy: "jwt",
   },

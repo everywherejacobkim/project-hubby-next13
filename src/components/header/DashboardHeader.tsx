@@ -4,7 +4,7 @@ import CurrentDate from "../date/Date";
 
 const DashboardHeader = ({ currentUser }: { currentUser: any }) => {
   return (
-    <header className="py-4 font-poppins">
+    <header className="font-poppins">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="my-4">
           <h1 className="text-black text-xl font-bold">
@@ -16,9 +16,9 @@ const DashboardHeader = ({ currentUser }: { currentUser: any }) => {
           <div>
             <CurrentDate />
           </div>
-         <div>
-          <CurrentWeather />
-         </div>
+          <div>
+            <CurrentWeather />
+          </div>
         </div>
       </div>
     </header>

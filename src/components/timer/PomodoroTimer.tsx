@@ -70,9 +70,9 @@ const PomodoroTimer: React.FC<{
   };
 
   return (
-    <div className="w-full lg:-mb-6">
+    <div className="w-full flex flex-col justify-between">
       <h1 className="font-semibold text-white mb-3">Pomodoro Timer</h1>
-      <div className="w-full h-[80%] flex flex-col gap-8 items-center justify-center">
+      <div className="w-full flex flex-col items-center justify-center -mt-4">
         <div className="w-48 h-48">
           <div className="w-full h-full rounded-full border-8">
             <div className="text-4xl font-bold text-center px-4 pt-14 text-white">
@@ -87,25 +87,25 @@ const PomodoroTimer: React.FC<{
             </div>
           </div>
         </div>
-        <div className="w-full">
-          {isRunning ? (
-            <div className="flex h-12 justify-between px-6">
-              <button>
-                <Image src={stopIcon} alt="stop-icon" onClick={handleStop} />
-              </button>
-              <button>
-                <Image src={pauseIcon} alt="pause-icon" onClick={handlePause} />
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={handleStartStop}
-              className="w-full h-12 bg-primary-action text-white rounded-lg text-xl"
-            >
-              Start
+      </div>
+      <div className="w-full">
+        {isRunning ? (
+          <div className="flex h-12 justify-between px-6">
+            <button>
+              <Image src={stopIcon} alt="stop-icon" onClick={handleStop} />
             </button>
-          )}
-        </div>
+            <button>
+              <Image src={pauseIcon} alt="pause-icon" onClick={handlePause} />
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={handleStartStop}
+            className="w-full h-12 bg-primary-action text-white rounded-lg text-xl"
+          >
+            Start
+          </button>
+        )}
       </div>
     </div>
   );

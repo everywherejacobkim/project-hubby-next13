@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-// import { useTodoState } from "../../app/context/TodoContext";
 import TodoItem from "./TodoItem";
 import TodoImage from "../../../public/assets/images/svg/todo-bg.svg";
 
@@ -12,9 +11,9 @@ interface Todo {
 }
 
 const TodoList: React.FC = () => {
-  // const todos = useTodoState();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodo, setNewTodo] = useState<string>("");
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   const addTodo = () => {
     if (newTodo.trim() === "") return;
@@ -51,29 +50,33 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full max-h-[400px]">
-      <h1 className="font-semibold mb-4">Your to-Do list</h1>
-      <div className="flex justify-center py-14">
-        {newTodo ? (
-          <ul>
-            {todos.map((todo) => (
-              <TodoItem
-                key={todo.id}
-                todo={todo}
-                toggleTodo={toggleTodo}
-                updateTodoText={updateTodoText}
-                deleteTodo={deleteTodo}
-              />
-            ))}
-          </ul>
-        ) : (
-          <Image src={TodoImage} alt="todo-image" />
-        )}
+    <div className="w-full h-full flex flex-col justify-between">
+      <h1 className="font-semibold">Your to-Do list</h1>
+      <div className="flex flex-col h-auto">
+        <div className="flex justify-center pt-4">
+          {isCompleted ? (
+            <ul className="w-full">
+              {todos.map((todo) => (
+                <TodoItem
+                  key={todo.id}
+                  todo={todo}
+                  toggleTodo={toggleTodo}
+                  updateTodoText={updateTodoText}
+                  deleteTodo={deleteTodo}
+                />
+              ))}
+            </ul>
+          ) : (
+            <div>
+              <Image src={TodoImage} alt="todo-image" />
+            </div>
+          )}
+        </div>
       </div>
-      <div className="flex w-full">
+      <div className="flex w-full relative">
         <input
           type="text"
-          className="border rounded p-3 w-full bg-white"
+          className="rounded p-3 w-full border border-neutral-border bg-neutral-light"
           placeholder="New task..."
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
