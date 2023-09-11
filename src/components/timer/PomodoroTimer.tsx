@@ -101,7 +101,7 @@ const PomodoroTimer: React.FC<{
         ) : (
           <button
             onClick={handleStartStop}
-            className="w-full h-12 bg-primary-action text-white rounded-lg text-xl"
+            className="w-full h-12 bg-white text-primary-action rounded-lg text-lg"
           >
             Start
           </button>

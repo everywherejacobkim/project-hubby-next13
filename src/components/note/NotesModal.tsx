@@ -31,7 +31,7 @@ const NotesModal = ({
                   type="submit"
                   name="submitNote"
                   value="Save"
-                  className="px-4 py-2 bg-primary-action text-white rounded-md"
+                  className="px-4 py-2 bg-primary-action text-white rounded-md hover:cursor-pointer"
                 />
               </div>
             </form>

@@ -5,6 +5,7 @@ import microphoneIcon from "../../../public/assets/icons/microphone.png";
 import NotesModal from "./NotesModal";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import NoteImage from "../../../public/assets/images/svg/note-bg.svg";
 
 interface InitialStateProps {
   content: string;
@@ -16,8 +17,9 @@ const initialState: InitialStateProps = {
 
 const Notes = () => {
   const [state, setState] = useState(initialState);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [notes, setNotes] = useState([]);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -36,6 +38,7 @@ const Notes = () => {
         throw new Error(err);
       });
     router.refresh();
+    setIsCompleted(true);
   };
 
   useEffect(() => {
@@ -56,7 +59,14 @@ const Notes = () => {
     <div className="w-full relative">
       <h1 className="font-semibold mb-4">Notes</h1>
       {/* Notes list */}
-      <div className="flex flex-col gap-2 p-2">{notes}</div>
+      {isCompleted ? (
+        <div className="flex flex-col gap-2 p-2">{notes}</div>
+      ) : (
+        <div className="flex justify-center">
+          <Image src={NoteImage} alt="note-icon" />
+        </div>
+      )}
+
       <NotesModal
         modalIsOpen={modalIsOpen}
         handleAddNote={handleAddNote}
