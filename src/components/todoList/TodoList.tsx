@@ -23,9 +23,9 @@ const TodoList: React.FC = () => {
       text: newTodo,
       completed: false,
     };
-
     setTodos([...todos, newTodoItem]);
     setNewTodo("");
+    setIsCompleted(true);
   };
 
   const toggleTodo = (id: number) => {
@@ -51,28 +51,31 @@ const TodoList: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col justify-between">
-      <h1 className="font-semibold">Your to-Do list</h1>
-      <div className="flex flex-col h-auto">
-        <div className="flex justify-center pt-4">
-          {isCompleted ? (
-            <ul className="w-full">
-              {todos.map((todo) => (
-                <TodoItem
-                  key={todo.id}
-                  todo={todo}
-                  toggleTodo={toggleTodo}
-                  updateTodoText={updateTodoText}
-                  deleteTodo={deleteTodo}
-                />
-              ))}
-            </ul>
-          ) : (
-            <div>
-              <Image src={TodoImage} alt="todo-image" />
-            </div>
-          )}
+      <div>
+        <h1 className="font-semibold">Your to-Do list</h1>
+        <div className="flex flex-col pt-4">
+          <div>
+            {isCompleted ? (
+              <ul className="w-full">
+                {todos.map((todo) => (
+                  <TodoItem
+                    key={todo.id}
+                    todo={todo}
+                    toggleTodo={toggleTodo}
+                    updateTodoText={updateTodoText}
+                    deleteTodo={deleteTodo}
+                  />
+                ))}
+              </ul>
+            ) : (
+              <div className="flex justify-center">
+                <Image src={TodoImage} alt="todo-image" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
       <div className="flex w-full relative">
         <input
           type="text"
