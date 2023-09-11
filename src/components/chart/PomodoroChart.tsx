@@ -27,8 +27,8 @@ const PomodoroChart = () => {
             datasets: [
               {
                 label: "Pomodoro Completed",
-                data: [completedCycles], // Use an array here with a single data point
-                backgroundColor: gradient, // Assign the gradient directly
+                data: [completedCycles],
+                backgroundColor: gradient,
                 borderColor: "#2D75DD",
                 borderWidth: 2,
                 fill: true,
@@ -65,8 +65,8 @@ const PomodoroChart = () => {
             },
           },
         });
-        gradient.addColorStop(0, "rgba(45,117,221,0.5)");
-        gradient.addColorStop(1, "rgba(255,255,255,1)");
+        gradient.addColorStop(0, "rgba(45,117,221,0.33)");
+        gradient.addColorStop(1, "rgba(255,255,255,0)");
         setChart(pomodoroChart);
       }
     }

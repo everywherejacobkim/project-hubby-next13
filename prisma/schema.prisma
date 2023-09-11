@@ -27,4 +27,4 @@ model Note {
   userId        String    @db.ObjectId
 }
   
-  
+

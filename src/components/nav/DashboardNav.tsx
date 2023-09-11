@@ -20,7 +20,7 @@ const DashboardNav: React.FC = () => {
   };
 
   return (
-    <nav className="bg-white text-white h-full w-[235px] fixed top-0 left-0">
+    <nav className="bg-white h-full w-[235px] fixed top-0 left-0">
       <div className="flex flex-col h-full items-center text-black relative">
         <Link href="/">
           <div className="mt-12">
@@ -33,26 +33,26 @@ const DashboardNav: React.FC = () => {
               <Image
                 src={Dashboard}
                 alt="dashboard-icon"
-                className="bg-white"
+                className="text-red-500"
               />
               <p className="mt-1">Dashboard</p>
             </button>
           </Link>
           <Link href="/calendar">
             <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">
-              <Image src={Calendar} alt="calendar-icon" className="bg-white" />
+              <Image src={Calendar} alt="calendar-icon" className="" />
               <p className="mt-1">Calendar</p>
             </button>
           </Link>
           <Link href="/email">
             <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">
-              <Image src={Email} alt="email-icon" className="bg-white" />
+              <Image src={Email} alt="email-icon" className="" />
               <p className="mt-1">Email</p>
             </button>
           </Link>
           <Link href="/settings">
             <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">
-              <Image src={Settings} alt="settings-icon" className="bg-white" />
+              <Image src={Settings} alt="settings-icon" className="" />
               <p className="mt-1">Settings</p>
             </button>
           </Link>

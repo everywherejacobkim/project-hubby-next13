@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTimerCycleStore } from "@/lib/stores/TimerCycle";
 import pauseIcon from "../../../public/assets/icons/pause-timer.png";
 import stopIcon from "../../../public/assets/icons/stop-timer.png";
+import TimerAnimation from "./TimerAnimation";
 
 const PomodoroTimer: React.FC<{
   initialPomodoro: number;
@@ -74,7 +75,7 @@ const PomodoroTimer: React.FC<{
       <h1 className="font-semibold text-white mb-3">Pomodoro Timer</h1>
       <div className="w-full flex flex-col items-center justify-center -mt-4">
         <div className="w-48 h-48">
-          <div className="w-full h-full rounded-full border-8">
+          <div className="w-full h-full rounded-full border-8 ">
             <div className="text-4xl font-bold text-center px-4 pt-14 text-white">
               {formatTime(minutes)}:{formatTime(seconds)}
             </div>
