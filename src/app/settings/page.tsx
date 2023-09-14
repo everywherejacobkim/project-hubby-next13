@@ -1,12 +1,17 @@
 import React from "react";
+import DashboardLayout from "@/components/layout/DashboardLayout";
+import DashboardNav from "@/components/nav/DashboardNav";
+import ProfileForm from "@/components/setting/ProfileForm";
+
 
 type Props = {};
 
 const SettingsPage = (props: Props) => {
   return (
-    <div>
-      <h1>This is Settings Page</h1>
-    </div>
+    <DashboardLayout
+    LeftMenuComponent={<DashboardNav />}
+    MainComponent={<ProfileForm />}
+  />
   );
 };
 
