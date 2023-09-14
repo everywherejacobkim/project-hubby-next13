@@ -1,11 +1,13 @@
 import React from "react"
 import Image from "next/image"
 import profile from "../../../public/assets/images/svg/profile-img.svg"
+import DeleteAccount from "./DeleteAccount"
 
 const ProfileForm: React.FC = () => {
 
     return(
-        <div className="pl-16">
+        <div className="mx-16" >
+              <div className="border-b-2">
             <h2 className="text-xl font-semibold pb-6">Profile Account</h2>
             <h5>Profile Picture</h5>
             <Image 
@@ -13,7 +15,7 @@ const ProfileForm: React.FC = () => {
                 alt="user profile picture"
                 className="pt-5 pb-8"
             />
-            <div>
+          
             <form  className="grid grid-cols-2 gap-2 w-1/2">
                 <div className="w-full">
                     <label className="block">First Name</label>
@@ -47,14 +49,15 @@ const ProfileForm: React.FC = () => {
                         className="w-full px-3 py-2 border-0 rounded "
                     />
                 </div>
-                <div>
+                <div className="pb-8">
                     <button 
                     type="button"
-                    className="flex justify-center w-1/3 bg-primary-action py-2 text-white rounded"
+                    className="flex justify-center w-1/3 bg-primary-action py-2 text-white rounded-xl"
                     >Update</button>
                 </div>
             </form>
             </div>
+            <DeleteAccount />
         </div>
     )
 }
