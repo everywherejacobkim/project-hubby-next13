@@ -23,7 +23,7 @@ const DashboardNav: React.FC = () => {
     <nav className="bg-white h-full w-[235px] fixed top-0 left-0">
       <div className="flex flex-col h-full items-center text-black relative">
         <Link href="/">
-          <div className="mt-12">
+          <div className="mt-9">
             <Image src={logo} alt="hubby" />
           </div>
         </Link>
