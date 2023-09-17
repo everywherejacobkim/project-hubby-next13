@@ -1,13 +1,17 @@
 "use client";
 import { usePathname } from "next/navigation";
+import useCurrentUser from "@/hooks/useCurrentUser";
 import CurrentWeather from "../location/CurrentWeather";
 import CurrentDate from "../date/Date";
 
-const DashboardHeader = ({ currentUser }: { currentUser: any }) => {
+const DashboardHeader = () => {
   const pathname = usePathname();
   const isDashboardRoute = pathname === "/dashboard";
 
+  const { data: currentUser, isLoading, error } = useCurrentUser();
+
   let pageTitle = null;
+
   if (pathname === "/dashboard") {
     pageTitle = (
       <h1 className="text-black text-xl font-bold">
@@ -35,7 +39,11 @@ const DashboardHeader = ({ currentUser }: { currentUser: any }) => {
               {pageTitle}
               {isDashboardRoute && (
                 <p className="text-sm mt-1">
-                  Let&apos;s make today productive!
+                  {isLoading
+                    ? "Loading..."
+                    : error
+                    ? "Error fetching data"
+                    : "Let's make today productive!"}
                 </p>
               )}
             </>
