@@ -10,12 +10,27 @@ const DashboardHeader = () => {
 
   const { data: session, status } = useSession();
 
+  const getGreeting = () => {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    if (currentHour < 12) {
+      return "Good morning";
+    } else if (currentHour < 18) {
+      return "Good afternoon";
+    } else {
+      return "Good evening";
+    }
+  };
+
+  const greeting = getGreeting();
+
   let pageTitle = null;
 
   if (pathname === "/dashboard") {
     pageTitle = (
       <h1 className="text-black text-xl font-bold">
-        Good morning, {session ? session.user?.name : "..."}
+        {greeting}, {session ? session.user?.name : "..."}
       </h1>
     );
   } else if (pathname === "/calendar") {
