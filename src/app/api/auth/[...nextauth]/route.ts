@@ -73,14 +73,50 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    async jwt({ token, user, session, trigger }) {
+      console.log("jwt callback", { token, user, session });
+
+      //update session user name
+      if (trigger === "update" && session?.name) {
+        token.name = session.name;
+      }
+
+      if (user) {
+        return {
+          ...token,
+          id: user.id,
+        };
+      }
+
+      //update user in the database
+      const newUser = await prisma.user.update({
+        where: {
+          id: token.id,
+        },
+        data: {
+          name: token.name,
+        },
+      });
+      console.log("newUser", newUser);
+      return token;
+    },
+    async session({ session, token, user }) {
+      console.log("session callback", { session, token, user });
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          name: token.name,
+        },
+      };
       return session;
     },
   },
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);

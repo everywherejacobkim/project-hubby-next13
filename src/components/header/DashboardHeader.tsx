@@ -1,6 +1,6 @@
 "use client";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import CurrentWeather from "../location/CurrentWeather";
 import CurrentDate from "../date/Date";
 
@@ -8,14 +8,14 @@ const DashboardHeader = () => {
   const pathname = usePathname();
   const isDashboardRoute = pathname === "/dashboard";
 
-  const { data: currentUser, isLoading, error } = useCurrentUser();
+  const { data: session, status } = useSession();
 
   let pageTitle = null;
 
   if (pathname === "/dashboard") {
     pageTitle = (
       <h1 className="text-black text-xl font-bold">
-        Good morning, {currentUser ? currentUser.name : "..."}
+        Good morning, {session ? session.user?.name : "..."}
       </h1>
     );
   } else if (pathname === "/calendar") {
@@ -39,10 +39,10 @@ const DashboardHeader = () => {
               {pageTitle}
               {isDashboardRoute && (
                 <p className="text-sm mt-1">
-                  {isLoading
+                  {!session
                     ? "Loading..."
-                    : error
-                    ? "Error fetching data"
+                    : status !== "authenticated"
+                    ? "User is not authenticated"
                     : "Let's make today productive!"}
                 </p>
               )}
