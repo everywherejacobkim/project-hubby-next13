@@ -6,7 +6,7 @@ export async function GET( req: Request, res: NextResponse ) {
       const userId = req.url.split("/users/")[1];
       console.log(userId);
       
-    const existingUser = await prisma.user.findFirst({
+    const existingUser = await prisma.user.findUnique({
       where: {
         id: userId,
       }
@@ -28,5 +28,36 @@ export async function GET( req: Request, res: NextResponse ) {
           { message: "Error getting user", error },
           { status: 500 }
       );
+  } finally {
+    await prisma.$disconnect();
+}
+}
+
+export async function PATCH(req: Request, res: NextResponse) {
+    try {
+        const userId = req.url.split("/users/")[1];
+        const { name, email } = await req.json();
+        
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: userId,
+            },
+            data: {
+                name,
+                email,
+            },
+        });
+        return NextResponse.json(
+            { message: "Success", updatedUser },
+            { status: 200 }
+        );
+        
+    } catch (error) {
+        return NextResponse.json(
+            { message: "Error getting user", error },
+            { status: 500 }
+        );
+    } finally {
+      await prisma.$disconnect();
   }
 }
