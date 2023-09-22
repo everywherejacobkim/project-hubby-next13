@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth].js", "src/app/providers/sessionProvider.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth].js", "src/app/providers/sessionProvider.tsx", "src/app/providers/providers.js"],
   "exclude": ["node_modules"]
 }

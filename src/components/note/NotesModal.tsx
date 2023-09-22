@@ -17,7 +17,7 @@ const NotesModal = ({
 
 
   const startListening = () => SpeechRecognition.startListening({ continuous: true, language: 'en-IN' });
-  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+  const { listening, transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
       return null
@@ -40,9 +40,12 @@ const NotesModal = ({
                 </div> */}
               <div  className="flex justify-between gap-2">
                 <div>
-                    <button className="px-4 py-2 bg-primary-action text-white rounded-md" onClick={startListening}>Start</button>
-                    <button className="px-4 py-2 bg-primary-warning text-white rounded-md" onClick={SpeechRecognition.stopListening}>Stop</button>
-
+                  {startListening ? 
+                   <button className="px-4 py-2 bg-primary-warning text-white rounded-md" onClick={SpeechRecognition.stopListening}>Stop</button>
+                   
+                  :
+                  <button className="px-4 py-2 bg-primary-action text-white rounded-md" onClick={startListening}>Start</button>
+                  }
                 </div>
                 <div>
                   <button className="px-4 py-2 bg-primary text-neutral rounded-md">
