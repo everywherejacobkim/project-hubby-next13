@@ -13,21 +13,22 @@ const ProfileForm: React.FC = () => {
 
         <form className="grid grid-cols-2 gap-2 w-1/2">
           <div className="w-full">
-            <label className="block">First Name</label>
+            <label className="block">Name</label>
             <input
               type="text"
               name="firstName"
               className="w-full px-3 py-2 border-0 rounded "
             />
           </div>
-          <div className="w-full">
+          <br/> 
+          {/* <div className="w-full">
             <label className="block">Last Name</label>
             <input
               type="text"
               name="lastName"
               className="w-full px-3 py-2 border-0 rounded "
             />
-          </div>
+          </div> */}
           <div className="w-full">
             <label className="block">Email</label>
             <input

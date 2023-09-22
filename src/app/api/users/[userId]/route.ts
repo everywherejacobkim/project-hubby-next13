@@ -1,27 +1,32 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
 
-export async function GET({ params }: {params: any}) {
+export async function GET( req: Request, res: NextResponse ) {
   try {
-  const { userId } = params; 
-  console.log(userId);
-    const existingUser = await prisma.user.findUnique({
+      const userId = req.url.split("/users/")[1];
+      console.log(userId);
+      
+    const existingUser = await prisma.user.findFirst({
       where: {
-        id: userId
+        id: userId,
       }
     });
 
     if (existingUser) {
-      return NextResponse.json({ ...existingUser });
+        return NextResponse.json(
+            { message: "Success", existingUser },
+            { status: 200 }
+            );
     } else {
-      return new NextResponse(JSON.stringify({ message: "User not found" }), {
-        status: 404,
-      });
+        return NextResponse.json(
+            { message: "User not found" },
+            { status: 404 }
+        );
     }
   } catch (error) {
-    console.error(error);
-    return new NextResponse(JSON.stringify({ message: "Error getting user" }), {
-      status: 500,
-    });
+      return NextResponse.json(
+          { message: "Error getting user", error },
+          { status: 500 }
+      );
   }
 }

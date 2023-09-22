@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 import prisma from "../../../lib/prismadb";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
-export async function POST(request: Request) {
+export async function POST(req: Request, res: NextResponse) {
   const currentUser = await getCurrentUser();
   if (!currentUser) {
     return null;
   }
-  const body = await request.json();
+  const body = await req.json();
   const { content } = body;
 
   const note = await prisma.note.create({
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
   return NextResponse.json(note, { status: 201 });
 }
 
-export async function handler(req: Request, res: any) {
+export async function handler(req: Request, res: NextResponse) {
   if (req.method === "GET") {
     try {
       const notes = await prisma.note.findMany({
@@ -31,12 +31,12 @@ export async function handler(req: Request, res: any) {
         ...note,
         createdAt: note.createdAt.toISOString(),
       }));
-      res.status(200).json(safeNotes);
+      NextResponse.json(safeNotes);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+      NextResponse.json({ error: "Internal Server Error" });
     }
   } else {
-    res.status(405).json({ error: "Method Not Allowed" });
+    NextResponse.json({ error: "Method Not Allowed" });
   }
 }
