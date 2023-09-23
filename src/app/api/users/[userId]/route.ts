@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
+import bcrypt from "bcrypt";
 
 export async function GET( req: Request, res: NextResponse ) {
   try {
@@ -33,31 +34,35 @@ export async function GET( req: Request, res: NextResponse ) {
 }
 }
 
-export async function PATCH(req: Request, res: NextResponse) {
+export async function PATCH(req: Request, res: NextResponse ) {
     try {
-        const userId = req.url.split("/users/")[1];
-        const { name, email } = await req.json();
-        
-        const updatedUser = await prisma.user.update({
-            where: {
-                id: userId,
-            },
-            data: {
-                name,
-                email,
-            },
-        });
-        return NextResponse.json(
-            { message: "Success", updatedUser },
-            { status: 200 }
-        );
-        
+      const userId = req.url.split("/users/")[1];
+      const { name, email, password } = await req.json();
+  
+      const saltRounds = 10; 
+      const hashedPassword = await bcrypt.hash(password, saltRounds);
+  
+      const updatedUser = await prisma.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          name,
+          email,
+          hashedPassword,
+        },
+      });
+  
+      return NextResponse.json(
+        { message: "Success", updatedUser },
+        { status: 200 }
+      );
     } catch (error) {
-        return NextResponse.json(
-            { message: "Error getting user", error },
-            { status: 500 }
-        );
+      return NextResponse.json(
+        { message: "Error updating user", error },
+        { status: 500 }
+      );
     } finally {
       await prisma.$disconnect();
+    }
   }
-}
