@@ -7,6 +7,7 @@ const userSchema = z.object({
     .string()
     .min(1, "Password is required")
     .min(6, "Password must be at least 6 characters"),
+  image: z.string().optional(), 
 });
 
 export default userSchema;
