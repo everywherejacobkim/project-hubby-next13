@@ -10,6 +10,7 @@ import Email from "../../../public/assets/icons/mail.png";
 import Settings from "../../../public/assets/icons/settings.png";
 import Darkmode from "../../../public/assets/icons/darkmode.png";
 import Logout from "../../../public/assets/icons/logout.png";
+import profileImage from "../../../public/assets/images/svg/profile-img.svg";
 
 const DashboardNav: React.FC = () => {
   const { data: session } = useSession();
@@ -30,7 +31,10 @@ const DashboardNav: React.FC = () => {
           </div>
         </Link>
         <div className="flex flex-col items-center">
+          {session?.user?.image ?
           <Image src={session?.user?.image} alt="profile_image" width={60} height={60} className="rounded-full -mb-4"/>
+          : <Image src={profileImage} className="-mb-4" />
+          }
           <p className="text-lg font-bold mt-6">{session?.user?.name}</p>
         </div>
         <div className="flex flex-col mt-10">

@@ -12,14 +12,14 @@ model User {
   name           String?
   email          String?   @unique
   emailVerified  DateTime?
-  hashedPassword String?
   image          String?
+  hashedPassword String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   notes          Note[]
   accounts       Account[]
 
-  @@map("user")
+  @@map("User")
 }
 
 model Note {
@@ -46,7 +46,7 @@ model Account {
   userId            String @db.ObjectId
 
   @@unique([provider, providerAccountId])
-  @@map("account")
+  @@map("Account")
 }
 
   
