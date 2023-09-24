@@ -13,7 +13,7 @@ const DashboardGrid: React.FC = () => {
         <PomodoroChart />
       </div>
       <div className="flex justify-center col-span-2 row-span-2 p-4 border shadow-xl rounded-3xl max-h-[400px] bg-primary-action">
-        <PomodoroTimer initialPomodoro={0.2 * 60} initialBreak={0.1 * 60} />
+        <PomodoroTimer initialPomodoro={25 * 60} initialBreak={5 * 60} />
       </div>
       <div className="flex justify-center col-span-2 row-span-4 p-4 border shadow-xl rounded-3xl bg-white max-h-[400px]">
         <Notes />

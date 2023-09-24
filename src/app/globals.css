@@ -28,3 +28,7 @@ h1 {
 textarea:focus {
   outline: none;
 }
+
+.hover-trigger:hover + .timer-description {
+  visibility: visible;
+}

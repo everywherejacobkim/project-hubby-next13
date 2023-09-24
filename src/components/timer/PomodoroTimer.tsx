@@ -2,9 +2,12 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTimerCycleStore } from "@/lib/stores/TimerCycle";
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 import pauseIcon from "../../../public/assets/icons/pause-timer.png";
 import stopIcon from "../../../public/assets/icons/stop-timer.png";
-import TimerAnimation from "./TimerAnimation";
+import timerInfoIcon from "../../../public/assets/images/svg/timer-info.svg";
+import timerSettingIcon from "../../../public/assets/images/svg/timer-setting.svg";
 
 const PomodoroTimer: React.FC<{
   initialPomodoro: number;
@@ -15,8 +18,10 @@ const PomodoroTimer: React.FC<{
   const [isBreak, setIsBreak] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
+  const [showSetting, setShowSetting] = useState(false);
 
-  const { completedCycles, setCompletedCycles }: any = useTimerCycleStore(); //zustand
+  const { completedCycles, setCompletedCycles }: any = useTimerCycleStore();
 
   useEffect(() => {
     let interval: NodeJS.Timeout | null = null;
@@ -70,9 +75,52 @@ const PomodoroTimer: React.FC<{
     setIsPaused(false);
   };
 
+  const showDescriptionModal = () => {
+    setShowDescription(!showDescription); 
+  };
+
+  const showSettingModal = () => {
+    setShowSetting(!showSetting); 
+  };
+
+  const dropdownOptions = [
+    '1', '2', '3', '4', '5',
+  ];
+
+  const defaultOption = dropdownOptions[0];
+
   return (
     <div className="w-full flex flex-col justify-between">
-      <h1 className="font-semibold text-white mb-3">Pomodoro Timer</h1>
+      <div className="flex justify-between px-1 relative">
+        <h1 className="font-semibold text-white mb-3">Pomodoro Timer</h1>
+        <div className="flex gap-2 -mt-2">
+          <button onClick={showDescriptionModal}>
+            <Image src={timerInfoIcon} alt="timer-info-icon" />
+          </button>
+          <button onClick={showSettingModal}>
+            <Image src={timerSettingIcon} alt="timer-info-setting" />
+          </button>
+        </div>
+        <div
+          className={`${
+            showDescription ? "block" : "hidden"
+          } timer-description absolute w-[85%] bg-white p-4 rounded-lg top-10`}
+        >
+          <p className="text-sm text-primary-action">
+            The Pomodoro Technique is a time management method based on 25-minute stretches of focused work broken by five-minute breaks. Longer breaks, typically 15 to 30 minutes, are taken after four consecutive work intervals
+          </p>
+        </div>
+        <div
+          className={`${
+            showSetting ? "block" : "hidden"
+          } timer-description absolute w-[50%] bg-white p-4 rounded-lg top-10 right-2 flex items-center gap-2`}
+        >
+          <p className="text-sm">
+            Session
+          </p>
+          <Dropdown options={dropdownOptions} value={defaultOption} placeholder="Select an option" />
+        </div>
+      </div>
       <div className="w-full flex flex-col items-center justify-center -mt-4">
         <div className="w-48 h-48">
           <div className="w-full h-full rounded-full border-8 ">
