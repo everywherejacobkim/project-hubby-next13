@@ -11,6 +11,7 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
+
       credentials: {
         email: {
           label: "Email",
@@ -43,13 +44,14 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID as string,
       clientSecret: env.GOOGLE_CLIENT_SECRET as string,
+      
 
       async profile(profile) {
         return {
           id: profile.sub,
           name: profile.name,
           email: profile.email,
-          image: profile.picture,
+          image: profile.image,
         };
       },
 
@@ -64,7 +66,7 @@ export const authOptions: NextAuthOptions = {
               id: profile.sub,
               email: profile.email,
               name: profile.name,
-              image: profile.picture,
+              image: profile.image,
             },
           });
         }

@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
+import { BiUser } from "react-icons/bi";
 import Image from "next/image";
 import profile from "../../../public/assets/images/svg/profile-img.svg";
-import DeleteAccount from "./DeleteAccount";
 
 const ProfileForm: React.FC = () => {
   const { data: session, status } = useSession();
@@ -14,6 +14,7 @@ const ProfileForm: React.FC = () => {
     password: "",
   });
 
+  const [profileImage, setProfileImage] = useState<File | null>(null); 
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,14 +25,39 @@ const ProfileForm: React.FC = () => {
     }));
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files[0];
+    setProfileImage(file);
+  };
+
+  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     const maxSizeInBytes = 5 * 1024 * 1024; // size 5mb maximum
+  //     if (file.size <= maxSizeInBytes) {
+  //       setState({
+  //         ...state,
+  //         image: file || null,
+  //       });
+  //     } else {
+  //       alert("Image size exceeds the limit (5MB). Please select a smaller image.");
+  //     }
+  //   }
+  // };
+
   const handleUpdate = async () => {
     try {
+      const formData = new FormData();
+      formData.append("name", formData.name);
+      formData.append("email", formData.email);
+      formData.append("password", formData.password);
+      if (profileImage) {
+        formData.append("image", profileImage);
+      }
+
       const response = await fetch(`/api/users/${session?.user?.id}`, {
-        method: "PATCH",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        method: "PUT",
+        body: formData,
       });
 
       if (response.ok) {
@@ -52,10 +78,19 @@ const ProfileForm: React.FC = () => {
       <div className="border-b-2">
         <h2 className="text-xl font-semibold pb-6">Profile Account</h2>
         <h5>Profile Picture</h5>
-        <Image src={profile} alt="user profile picture" className="pt-5 pb-8" />
-
-        <form className="grid grid-cols-2 gap-2 w-1/2">
-          <div className="w-full">
+        <form className="flex flex-col w-1/2 gap-4" encType="multipart/form-data">
+          <div>
+            <Image src={profile} alt="user profile picture" className="pt-5 pb-8" />
+            <div className="w-full">
+              <input
+                type="file"
+                name="profileImage"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </div>
+          </div>
+          <div className="w-full mt-4">
             <label className="block">Name</label>
             <input
               type="text"
@@ -65,7 +100,6 @@ const ProfileForm: React.FC = () => {
               onChange={handleInputChange}
             />
           </div>
-          <br/> 
           <div className="w-full">
             <label className="block">Email</label>
             <input
@@ -76,7 +110,7 @@ const ProfileForm: React.FC = () => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="w-full">
+          <div className="w-full mb-4">
             <label className="block">Password</label>
             <input
               type="password"
@@ -97,7 +131,6 @@ const ProfileForm: React.FC = () => {
           </div>
         </form>
       </div>
-      <DeleteAccount />
     </div>
   );
 };
