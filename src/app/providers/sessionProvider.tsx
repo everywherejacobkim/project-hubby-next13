@@ -20,6 +20,6 @@ if (!mounted){
     return <>{children}</>
 }
   return <SessionProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider attribute="class">{children}</ThemeProvider>
         </SessionProvider>;
 }

@@ -14,7 +14,7 @@ const DashboardHeader = () => {
 
   if (pathname === "/dashboard") {
     pageTitle = (
-      <h1 className="text-black text-xl font-bold">
+      <h1 className="dark:text-white text-black text-xl font-bold">
         Good morning, {currentUser ? currentUser.name : "..."}
       </h1>
     );
