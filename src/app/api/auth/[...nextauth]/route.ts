@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
-        const user = await prisma.user.findUnique({
+        const user = await prisma.User.findUnique({
           where: { email: credentials.email },
         });
         if (!user || !user?.hashedPassword) {
@@ -51,7 +51,7 @@ export const authOptions: NextAuthOptions = {
           id: profile.sub,
           name: profile.name,
           email: profile.email,
-          image: profile.image,
+          image: profile.picture,
         };
       },
 
@@ -66,7 +66,7 @@ export const authOptions: NextAuthOptions = {
               id: profile.sub,
               email: profile.email,
               name: profile.name,
-              image: profile.image,
+              image: profile.picture,
             },
           });
         }
