@@ -26,6 +26,7 @@ module.exports = {
         "neutral-action": "#ABABAF",
         "neutral-border": "#C7C6CA",
         "neutral-chat": "#D9D9D9",
+        "neutral-box":"rgba(255, 255, 255, 0.08)"
       },
       fontFamily: {
         roboto: ["Roboto"],

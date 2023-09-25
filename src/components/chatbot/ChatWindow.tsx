@@ -85,7 +85,7 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className="w-full bg-white overflow-x-hidden">
+    <div className="w-full bg-white overflow-x-hidden dark:bg-transparent">
       <div className="flex justify-between pr-1">
         <h1 className="font-semibold">ChatGPT</h1>
         <a href="https://chat.openai.com" target="_blank">
@@ -140,7 +140,7 @@ const ChatWindow = () => {
             </div>
           )}
         </div>
-        <div className="w-full">
+        <div className="w-full ">
           <ChatInput
             handleSubmit={handleSubmit}
             inputValue={inputValue}

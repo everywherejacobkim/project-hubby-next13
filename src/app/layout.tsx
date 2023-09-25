@@ -13,7 +13,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextAuthSessionProvider>
-          <ThemeSwitcher />
+          {/* <ThemeSwitcher /> */}
             {children}
         </NextAuthSessionProvider>
       </body>

@@ -17,9 +17,14 @@ const ThemeSwitcher = (props:any) => {
 
     return (
         <div className="flex justify-end">
-            THE CURRENT THEME IS : {theme}
-            <button onClick={()=>setTheme("light")} >Light Mode</button>
-            <button onClick={()=>setTheme("dark")}>Dark Mode</button>
+             {theme === 'dark' ? 
+                <button onClick={()=>setTheme("light")} >Light Mode</button>
+               
+                : (
+                    <button onClick={()=>setTheme("dark")}>Dark Mode</button>)}
+            {/* THE CURRENT THEME IS : {theme} */}
+            
+            
         </div>
     )
 }
