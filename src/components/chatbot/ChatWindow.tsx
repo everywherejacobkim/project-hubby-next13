@@ -4,7 +4,7 @@ import Image from "next/image";
 import axios from "axios";
 import ChatInput from "./ChatInput";
 import ChatBot from "../../../public/assets/images/svg/chat-bot.svg";
-import ChatBotText from "../../../public/assets/images/svg/chat-bot-hello.svg";
+import chatGpt from "../../../public/assets/icons/chatgpt.png";
 import newScreenIcon from "../../../public/assets/icons/newscreen.png";
 import aiIcon from "../../../public/assets/icons/chat-ai.png";
 import copyIcon from "../../../public/assets/icons/chat-copy.png";
@@ -85,7 +85,7 @@ const ChatWindow = () => {
   };
 
   return (
-    <div className="w-full bg-white overflow-x-hidden">
+    <div className="w-full bg-white overflow-x-hidden dark:bg-transparent">
       <div className="flex justify-between pr-1">
         <h1 className="font-semibold">ChatGPT</h1>
         <a href="https://chat.openai.com" target="_blank">
@@ -134,13 +134,23 @@ const ChatWindow = () => {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-4 pt-4">
+            <div className="flex flex-col items-center gap-4 pt-4 ">
               <Image src={ChatBot} alt="chat-bot-icon" />
-              <Image src={ChatBotText} alt="chat-bot-text-icon" />
+              <div className="flex py-2 px-7 rounded-3xl bg-primary dark:bg-black">
+                
+                <Image  
+                  src={chatGpt} 
+                 alt="chat gpt icon"
+
+                 width={15}   
+                    />
+                <h5>Hello! Ask anything</h5>
+              </div>
+              {/* <Image src={ChatBotText} alt="chat-bot-text-icon" /> */}
             </div>
           )}
         </div>
-        <div className="w-full">
+        <div className="w-full ">
           <ChatInput
             handleSubmit={handleSubmit}
             inputValue={inputValue}

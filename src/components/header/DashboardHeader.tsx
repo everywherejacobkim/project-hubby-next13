@@ -31,6 +31,7 @@ const DashboardHeader = () => {
     pageTitle = (
       <h1 className="text-black text-xl font-bold">
         {greeting}, {session ? session.user?.name : "..."}
+
       </h1>
     );
   } else if (pathname === "/calendar") {
@@ -64,7 +65,7 @@ const DashboardHeader = () => {
             </>
           )}
         </div>
-        <div className="flex items-center space-x-4 shadow rounded-3xl py-2.5 px-7 bg-white">
+        <div className="flex items-center space-x-4 shadow rounded-3xl py-2.5 px-7 bg-white dark:bg-neutral-box">
           <div>
             <CurrentDate />
           </div>

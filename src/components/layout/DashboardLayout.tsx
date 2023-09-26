@@ -13,7 +13,7 @@ const DashboardLayout = async ({
         {LeftMenuComponent}
       </div>
       <div className="flex-1 flex flex-col">
-        <div className="bg-primary flex-1">
+        <div className="dark:bg-neutral-dark bg-primary flex-1">
           <DashboardHeader />
           {MainComponent}
         </div>
