@@ -1,6 +1,8 @@
 import "./globals.css";
+
 import NextAuthSessionProvider from "./providers/sessionProvider"
 import ThemeSwitcher from "./theme/ThemeSwitcher"
+
 
 export default function RootLayout({
   children,
@@ -16,6 +18,7 @@ export default function RootLayout({
           {/* <ThemeSwitcher /> */}
             {children}
         </NextAuthSessionProvider>
+
       </body>
     </html>
   );

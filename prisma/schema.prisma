@@ -12,11 +12,14 @@ model User {
   name           String?
   email          String?   @unique
   emailVerified  DateTime?
-  hashedPassword String?
   image          String?
+  hashedPassword String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
   notes          Note[]
+  accounts       Account[]
+
+  @@map("User")
 }
 
 model Note {
@@ -26,5 +29,25 @@ model Note {
   user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        String    @db.ObjectId
 }
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  token_type        String?
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  id_token          String? @db.String
+  scope             String?
+  session_state     String?
+  expires_at        Int?
+  user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String @db.ObjectId
+
+  @@unique([provider, providerAccountId])
+  @@map("Account")
+}
+
   
 

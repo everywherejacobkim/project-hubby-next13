@@ -6,8 +6,10 @@ import {useState, useEffect} from "react"
 
 export default function NextAuthSessionProvider({
   children,
+  session,
 }: {
   children?: React.ReactNode;
+  session?: any;
 } = {}) {
 
   const [ mounted, setMounted ] = useState(false);
@@ -19,7 +21,8 @@ export default function NextAuthSessionProvider({
 if (!mounted){
     return <>{children}</>
 }
-  return <SessionProvider>
+  return <SessionProvider session={session}>
           <ThemeProvider attribute="class">{children}</ThemeProvider>
         </SessionProvider>;
+
 }

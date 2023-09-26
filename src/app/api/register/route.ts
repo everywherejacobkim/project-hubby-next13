@@ -6,7 +6,7 @@ import userSchema from "../../../lib/userSchema";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, password } = userSchema.parse(body);
+    const { name, email, password, image } = userSchema.parse(body);
     const hashedPassword = await bcrypt.hash(password, 10);
 
     //Check if user already exists
@@ -25,6 +25,7 @@ export async function POST(request: Request) {
         name,
         email,
         hashedPassword,
+        image,
       },
     });
 
