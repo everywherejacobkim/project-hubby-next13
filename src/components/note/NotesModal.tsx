@@ -27,20 +27,20 @@ const NotesModal = ({
     <div>
       <div className={`modal ${modalIsOpen ? "block" : "hidden"}`}>
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className=" bg-white p-6 rounded-md w-1/2">
+          <div className=" bg-white dark:bg-neutral-dark p-6 rounded-md w-1/2">
             <form onSubmit={handleAddNote}>
               <textarea
                 value={transcript}
                 rows={11}
                 onChange={handleChange}
-                className="p-2 w-full mb-2 rounded-md border border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent "
+                className="dark:bg-neutral-box p-2 w-full mb-2 rounded-md border border-gray-200 dark:border-neutral focus:outline-none focus:ring-1 focus:ring-primary focus:border-transparent "
               />
                {/* <div className="main-content" onClick={() =>  setTextToCopy(transcript)}>
                     {transcript}
                 </div> */}
               <div  className="flex justify-between gap-2">
                 <div>
-                  {startListening ? 
+                  {listening ? 
                    <button className="px-4 py-2 bg-primary-warning text-white rounded-md" onClick={SpeechRecognition.stopListening}>Stop</button>
                    
                   :

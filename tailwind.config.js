@@ -26,7 +26,8 @@ module.exports = {
         "neutral-action": "#ABABAF",
         "neutral-border": "#C7C6CA",
         "neutral-chat": "#D9D9D9",
-        "neutral-box":"rgba(255, 255, 255, 0.08)"
+        "neutral-box":"rgba(255, 255, 255, 0.08)",
+        "neutral-modalDark":"linear-gradient(0deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.08) 100%), var(--neutral-5, #0D0E11);"
       },
       fontFamily: {
         roboto: ["Roboto"],
