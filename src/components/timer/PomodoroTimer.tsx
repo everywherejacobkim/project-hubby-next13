@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTimerCycleStore } from "@/lib/stores/TimerCycle";
-import Dropdown from 'react-dropdown';
+import Dropdown from "@/components/dropdown/Dropdown";
 import 'react-dropdown/style.css';
 import pauseIcon from "../../../public/assets/icons/pause-timer.png";
 import stopIcon from "../../../public/assets/icons/stop-timer.png";
@@ -20,6 +20,7 @@ const PomodoroTimer: React.FC<{
   const [isPaused, setIsPaused] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
   const [showSetting, setShowSetting] = useState(false);
+  const [sessionNumber, setSessionNumber] = useState<string | null>(null)
 
   const { completedCycles, setCompletedCycles }: any = useTimerCycleStore();
 
@@ -83,11 +84,9 @@ const PomodoroTimer: React.FC<{
     setShowSetting(!showSetting); 
   };
 
-  const dropdownOptions = [
-    '1', '2', '3', '4', '5',
+  const options = [
+    '1', '2', '3', '4', '5', '6'
   ];
-
-  const defaultOption = dropdownOptions[0];
 
   return (
     <div className="w-full flex flex-col justify-between">
@@ -104,7 +103,7 @@ const PomodoroTimer: React.FC<{
         <div
           className={`${
             showDescription ? "block" : "hidden"
-          } timer-description absolute w-[85%] bg-white p-4 rounded-lg top-10`}
+          } timer-description absolute w-[85%] bg-white p-4 rounded-xl top-10`}
         >
           <p className="text-sm text-primary-action">
             The Pomodoro Technique is a time management method based on 25-minute stretches of focused work broken by five-minute breaks. Longer breaks, typically 15 to 30 minutes, are taken after four consecutive work intervals
@@ -113,12 +112,12 @@ const PomodoroTimer: React.FC<{
         <div
           className={`${
             showSetting ? "block" : "hidden"
-          } timer-description absolute w-[50%] bg-white p-4 rounded-lg top-10 right-2 flex items-center gap-2`}
+          } timer-description absolute w-[45%] bg-white p-4 rounded-xl top-10 right-2 flex items-center justify-center gap-2`}
         >
           <p className="text-sm">
             Session
           </p>
-          <Dropdown options={dropdownOptions} value={defaultOption} placeholder="Select an option" />
+          <Dropdown options={options} sessionNumber={sessionNumber} setSessionNumber={setSessionNumber} />
         </div>
       </div>
       <div className="w-full flex flex-col items-center justify-center -mt-4">
@@ -127,11 +126,11 @@ const PomodoroTimer: React.FC<{
             <div className="text-4xl font-bold text-center px-4 pt-14 text-white">
               {formatTime(minutes)}:{formatTime(seconds)}
             </div>
-            <div className="text-lg mt-2 text-center px-4 text-white">
+            <div className="text-md mt-1 text-center px-4 text-white">
               {isBreak
                 ? "Break"
                 : completedCycles === 0
-                ? "Focus"
+                ? !sessionNumber ? "Focus" : `${sessionNumber - (sessionNumber -1) } of ${sessionNumber} sessions`
                 : `#${completedCycles}`}
             </div>
           </div>
