@@ -3,17 +3,14 @@ import {useState, useEffect} from "react"
 import { useTheme } from "next-themes"
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../../public/assets/images/svg/logo-hubby.svg";
-import Dashboard from "../../../public/assets/icons/dashboard.png";
-import Calendar from "../../../public/assets/icons/calendar.png";
-import Email from "../../../public/assets/icons/mail.png";
-import Settings from "../../../public/assets/icons/settings.png";
-import Darkmode from "../../../public/assets/icons/darkmode.png";
-import Logout from "../../../public/assets/icons/logout.png";
 import { signOut } from "next-auth/react";
 import ThemeSwitcher from "@/app/theme/ThemeSwitcher";
+import useCurrentUser from "@/lib/hooks/useCurrentUser";
+import userPlaceholder from "../../../public/assets/images/svg/user-placeholder.svg";
 
 const DashboardNav: React.FC = () => {
+  const { data: currentUser } = useCurrentUser();
+
   const signOutBtnHandler = async () => {
     await signOut({
       redirect: true,
@@ -52,8 +49,16 @@ const DashboardNav: React.FC = () => {
          
           </div>
         </Link>
+
+        <div className="flex flex-col items-center mt-10">
+          {currentUser?.data?.image ?
+          <Image src={currentUser?.data?.image} alt="profile_image" width={60} height={60} className="rounded-full -mb-4"/>
+          : <Image src={userPlaceholder} className="-mb-4" alt="profile_placeholder" />
+          }
+          <p className="text-lg font-bold mt-6">{currentUser?.data?.name}</p>
+        </div>
+
         <div className="flex flex-col mt-10">
-        
           <Link href="/dashboard">
           
             <button className="w-full mb-3 flex items-center gap-3 rounded-full py-3 px-8 hover:bg-primary-action focus:bg-primary-action focus:text-white hover:text-white">

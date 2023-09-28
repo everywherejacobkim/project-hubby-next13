@@ -1,6 +1,5 @@
 import "./globals.css";
-
-import NextAuthSessionProvider from "./providers/sessionProvider"
+import NextAuthSessionProvider from "@/lib/providers/sessionProvider";
 import ThemeSwitcher from "./theme/ThemeSwitcher"
 
 
