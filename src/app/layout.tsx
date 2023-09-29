@@ -1,23 +1,17 @@
 import "./globals.css";
 import NextAuthSessionProvider from "@/lib/providers/sessionProvider";
-import ThemeSwitcher from "./theme/ThemeSwitcher"
-
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-
-  
   return (
     <html lang="en">
       <body>
-        <NextAuthSessionProvider>
-          {/* <ThemeSwitcher /> */}
-            {children}
-        </NextAuthSessionProvider>
-
+        <Toaster />
+        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
       </body>
     </html>
   );

@@ -24,7 +24,7 @@
     }
   },
 
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth].js", "src/lib/providers/sessionProvider.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth].js", "src/lib/providers/sessionProvider.tsx", "src/components/imageUpload"],
 
   "exclude": ["node_modules"]
 }

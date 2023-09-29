@@ -1,94 +1,64 @@
 "use client";
-import React, { useState } from "react";
-import { useSession } from "next-auth/react";
-import { BiUser } from "react-icons/bi";
-import Image from "next/image";
-import profile from "../../../public/assets/images/svg/profile-img.svg";
+import React, { useState, useEffect, useCallback } from "react";
+import useCurrentUser from "@/lib/hooks/useCurrentUser";
+import useUser from "@/lib/hooks/useUser";
+import axios from "axios";
+import ImageUpload from "../imageUpload/ImageUpload";
+import { toast } from "react-hot-toast";
+import placeholder from "../../../public/assets/images/svg/user-placeholder.svg";
 
 const ProfileForm: React.FC = () => {
-  const { data: session, status } = useSession();
+  const { data: currentUser } = useCurrentUser();
+  const { mutate: mutateFetchedUser } = useUser(currentUser?.data?.id);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [image, setImage] = useState("");
 
-  const [profileImage, setProfileImage] = useState<File | null>(null); 
-  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  useEffect(() => {
+    setName(currentUser?.data?.name);
+    setEmail(currentUser?.data?.email);
+    setPassword(currentUser?.data?.password);
+    setImage(currentUser?.data?.image);
+  }, [currentUser]);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files[0];
-    setProfileImage(file);
-  };
-
-  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = e.target.files?.[0];
-  //   if (file) {
-  //     const maxSizeInBytes = 5 * 1024 * 1024; // size 5mb maximum
-  //     if (file.size <= maxSizeInBytes) {
-  //       setState({
-  //         ...state,
-  //         image: file || null,
-  //       });
-  //     } else {
-  //       alert("Image size exceeds the limit (5MB). Please select a smaller image.");
-  //     }
-  //   }
-  // };
-
-  const handleUpdate = async () => {
+  const onSubmit = useCallback(async () => {
     try {
-      const formData = new FormData();
-      formData.append("name", formData.name);
-      formData.append("email", formData.email);
-      formData.append("password", formData.password);
-      if (profileImage) {
-        formData.append("image", profileImage);
-      }
-
-      const response = await fetch(`/api/users/${session?.user?.id}`, {
-        method: "PUT",
-        body: formData,
+      setIsLoading(true);
+      await axios.patch(`/api/users/${currentUser?.data?.id}`, {
+        name,
+        email,
+        password,
+        image,
       });
-
-      if (response.ok) {
-        setUpdateSuccess(true);
-        window.alert("Profile updated successfully!");
-      } else {
-        setUpdateSuccess(false);
-        console.error("Error updating profile:", response.statusText);
-      }
+      mutateFetchedUser();
+      toast.success("Profile updated successfully!");
     } catch (error) {
-      console.error("Error updating profile:", error);
-      setUpdateSuccess(false);
+      toast.error("Oops.. Please try again!");
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }, [name, email, password, image, mutateFetchedUser]);
 
   return (
     <div className="mx-8 mt-8">
       <div className="border-b-2">
         <h2 className="text-xl font-semibold pb-6">Profile Account</h2>
-        <h5>Profile Picture</h5>
-        <form className="flex flex-col w-1/2 gap-4" encType="multipart/form-data">
-          <div>
-            <Image src={profile} alt="user profile picture" className="pt-5 pb-8" />
-            <div className="w-full">
-              <input
-                type="file"
-                name="profileImage"
-                accept="image/*"
-                onChange={handleImageChange}
-              />
-            </div>
+        <form
+          className="flex flex-col w-1/2 gap-4"
+          encType="multipart/form-data"
+        >
+          <div className="w-full flex mt-2">
+            <ImageUpload
+              value={image}
+              onChange={(image) => setImage(image)}
+              label="Upload"
+              disabled={isLoading}
+              placeholder={placeholder}
+            />
           </div>
           <div className="w-full mt-4">
             <label className="block">Name</label>
@@ -96,8 +66,8 @@ const ProfileForm: React.FC = () => {
               type="text"
               name="name"
               className="w-full px-3 py-2 border-0 rounded"
-              value={formData.name}
-              onChange={handleInputChange}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="w-full">
@@ -106,8 +76,8 @@ const ProfileForm: React.FC = () => {
               type="email"
               name="email"
               className="w-full px-3 py-2 border-0 rounded"
-              value={formData.email}
-              onChange={handleInputChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="w-full mb-4">
@@ -116,13 +86,13 @@ const ProfileForm: React.FC = () => {
               type="password"
               name="password"
               className="w-full px-3 py-2 border-0 rounded"
-              value={formData.password}
-              onChange={handleInputChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="pb-8">
             <button
-              onClick={handleUpdate}
+              onClick={onSubmit}
               type="button"
               className="flex justify-center w-1/3 bg-primary-action py-2 text-white rounded-xl"
             >
