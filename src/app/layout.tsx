@@ -10,8 +10,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <NextAuthSessionProvider>
         <Toaster />
-        <NextAuthSessionProvider>{children}</NextAuthSessionProvider>
+          {children}
+        </NextAuthSessionProvider>
       </body>
     </html>
   );
