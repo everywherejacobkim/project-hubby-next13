@@ -104,7 +104,7 @@ const DashboardNav: React.FC = () => {
             <Image
               src={userPlaceholder}
               className="-mb-4"
-              alt="profile_placeholder"
+              alt="profile_image_placeholder"
             />
           )}
           <p className="text-lg font-bold mt-6">{currentUser?.existingUser?.name}</p>
