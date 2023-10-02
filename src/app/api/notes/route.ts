@@ -19,7 +19,7 @@ export async function POST(req: Request, res: NextResponse) {
   return NextResponse.json(note, { status: 201 });
 }
 
-export async function handler(req: Request, res: NextResponse) {
+export async function GET(req: Request, res: NextResponse) {
   if (req.method === "GET") {
     try {
       const notes = await prisma.note.findMany({
