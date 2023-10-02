@@ -1,5 +1,6 @@
 :root {
   --fc-button-active-bg-color: #fff;
+  --fc-button-hover-bg-color: #fff;
   --fc-today-bg-color: #ecedf7;
   --fc-event-text-color: #000;
 }
@@ -56,5 +57,5 @@
 }
 
 .fc-event-title-container {
-    text-align: center;
+  text-align: center;
 }
