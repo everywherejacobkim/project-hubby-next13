@@ -32,3 +32,5 @@ textarea:focus {
 .hover-trigger:hover + .timer-description {
   visibility: visible;
 }
+
+

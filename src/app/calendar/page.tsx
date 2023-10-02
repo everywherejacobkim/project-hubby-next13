@@ -1,10 +1,10 @@
-import DashboardLayout from "@/components/layout/DashboardLayout";
+import PageLayout from "@/components/layout/PageLayout";
 import DashboardNav from "@/components/nav/DashboardNav";
 import Calendar from "@/components/calendar/Calendar"
 
 const CalendarPage = () => {
   return (
-    <DashboardLayout
+    <PageLayout
       LeftMenuComponent={<DashboardNav />}
       MainComponent={<Calendar />}
     />
