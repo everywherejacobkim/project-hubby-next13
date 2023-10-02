@@ -1,0 +1,60 @@
+:root {
+  --fc-button-active-bg-color: #fff;
+  --fc-today-bg-color: #ecedf7;
+  --fc-event-text-color: #000;
+}
+
+.fc-scrollgrid-sync-table tbody tr:nth-child(6) {
+  display: none;
+}
+
+.fc-toolbar-chunk .fc-today-button {
+  display: none;
+}
+
+.fc .fc-toolbar {
+  justify-content: start;
+  gap: 1.6em;
+}
+
+.fc .fc-button-primary {
+  background: #fff;
+}
+
+.fc .fc-button {
+  padding: 1px;
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.fc .fc-button .fc-icon {
+  color: #000;
+}
+
+.fc .fc-button-group {
+  gap: 0.5em;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border: none;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-right: 10px solid #fff;
+  border-bottom: 1px solid #0d0e11;
+}
+
+.fc-scrollgrid-sync-inner {
+  text-align: start;
+  font-weight: 400;
+}
+
+.fc-daygrid-day-top {
+  justify-content: left;
+}
+
+.fc-event-title-container {
+    text-align: center;
+}

@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTheme } from "next-themes";
-import { useSession } from "next-auth/react";
 import useUser from "@/lib/hooks/useUser";
+import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
@@ -10,7 +10,7 @@ import ThemeSwitcher from "@/app/theme/ThemeSwitcher";
 import userPlaceholder from "../../../public/assets/images/svg/user-placeholder.svg";
 
 const DashboardNav: React.FC = () => {
-  const { data: session } = useSession();
+  const { data: session } = useCurrentUser();
   const { data: currentUser } = useUser(session?.user?.id);
 
   const signOutBtnHandler = async () => {
@@ -107,7 +107,9 @@ const DashboardNav: React.FC = () => {
               alt="profile_image_placeholder"
             />
           )}
-          <p className="text-lg font-bold mt-6">{currentUser?.existingUser?.name}</p>
+          <p className="text-lg font-bold mt-6">
+            {currentUser?.existingUser?.name}
+          </p>
         </div>
 
         <div className="flex flex-col mt-10">
