@@ -11,7 +11,6 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
-
       credentials: {
         email: {
           label: "Email",
@@ -25,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
-        const user = await prisma.User.findUnique({
+        const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
         if (!user || !user?.hashedPassword) {
@@ -44,7 +43,6 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID as string,
       clientSecret: env.GOOGLE_CLIENT_SECRET as string,
-      
 
       async profile(profile) {
         return {
