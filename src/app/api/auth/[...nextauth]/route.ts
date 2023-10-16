@@ -42,15 +42,8 @@ export const authOptions: NextAuthOptions = {
     }),
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID as string,
-      clientSecret: env.GOOGLE_CLIENT_SECRET as string, 
-      authorization: {
-        params: {
-          scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
-        }
-      },
+      clientSecret: env.GOOGLE_CLIENT_SECRET as string,
 
-      
-     
       async profile(profile) {
         return {
           id: profile.sub,
@@ -80,23 +73,16 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-  
-    
-
     async jwt({ token, user, account, session, trigger }) {
-      console.log("jwt callback", { token, user, session });
-
-      //get access token??
-      if (account?.accessToken) {
-        token.accessToken = account.accessToken;
-        return(
-          true
-        )
-      }
-
       //update session user name
       if (trigger === "update" && session?.name) {
         token.name = session.name;
+      }
+
+      if (account) {
+        token = Object.assign({}, token, {
+          accessToken: account.access_token,
+        });
       }
 
       if (user) {
@@ -105,8 +91,6 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
         };
       }
-
-      
 
       //update user in the database
       const newUser = await prisma.user.update({
@@ -117,7 +101,7 @@ export const authOptions: NextAuthOptions = {
           name: token.name,
         },
       });
-      console.log("newUser", newUser);
+
       return token;
     },
     async session({ session, token, user }) {
@@ -125,10 +109,9 @@ export const authOptions: NextAuthOptions = {
       return {
         ...session,
         user: {
-          ...session.user,
           id: token.id,
           name: token.name,
-          
+          accessToken: token.accessToken,
         },
       };
       return session;

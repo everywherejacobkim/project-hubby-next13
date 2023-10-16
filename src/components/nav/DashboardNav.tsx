@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { useTheme } from "next-themes";
-import useUser from "@/lib/hooks/useUser";
 import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,9 +105,7 @@ const DashboardNav: React.FC = () => {
               alt="profile_image_placeholder"
             />
           )}
-          <p className="text-lg font-bold mt-6">
-            {currentUser?.data.name}
-          </p>
+          <p className="text-lg font-bold mt-6">{currentUser?.data.name}</p>
         </div>
 
         <div className="flex flex-col mt-10">
