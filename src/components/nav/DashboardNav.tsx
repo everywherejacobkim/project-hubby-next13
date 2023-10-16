@@ -10,8 +10,7 @@ import ThemeSwitcher from "@/app/theme/ThemeSwitcher";
 import userPlaceholder from "../../../public/assets/images/svg/user-placeholder.svg";
 
 const DashboardNav: React.FC = () => {
-  const { data: session } = useCurrentUser();
-  const { data: currentUser } = useUser(session?.user?.id);
+  const { data: currentUser } = useCurrentUser();
 
   const signOutBtnHandler = async () => {
     await signOut({
@@ -92,9 +91,9 @@ const DashboardNav: React.FC = () => {
         </Link>
 
         <div className="flex flex-col items-center mt-10">
-          {currentUser?.existingUser?.image ? (
+          {currentUser?.data?.image ? (
             <Image
-              src={currentUser?.existingUser?.image}
+              src={currentUser?.data.image}
               alt="profile_image"
               width={60}
               height={60}
@@ -108,7 +107,7 @@ const DashboardNav: React.FC = () => {
             />
           )}
           <p className="text-lg font-bold mt-6">
-            {currentUser?.existingUser?.name}
+            {currentUser?.data.name}
           </p>
         </div>
 
