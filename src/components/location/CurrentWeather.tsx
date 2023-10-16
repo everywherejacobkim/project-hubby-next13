@@ -33,7 +33,7 @@ const CurrentWeather: React.FC = () => {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       setLocation({ latitude, longitude });
-      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+      // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
       // Make API call to OpenWeatherMap
       fetch(
@@ -42,7 +42,7 @@ const CurrentWeather: React.FC = () => {
         .then((response) => response.json())
         .then((data: WeatherData) => {
           setWeather(data);
-          console.log("weather data", data);
+          // console.log("weather data", data);
         })
         .catch((error) => console.log(error));
     }

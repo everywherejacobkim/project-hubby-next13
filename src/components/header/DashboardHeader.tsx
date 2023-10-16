@@ -29,7 +29,7 @@ const DashboardHeader = () => {
 
   if (pathname === "/dashboard") {
     pageTitle = (
-      <h1 className="text-black text-xl font-bold">
+      <h1 className="text-black text-xl font-bold dark:text-white">
         {greeting}, {session ? session.user?.name : "..."}
 
       </h1>
@@ -39,7 +39,7 @@ const DashboardHeader = () => {
       <h1 className="text-black text-3xl font-medium ml-4">Calendar</h1>
     );
   } else if (pathname === "/email") {
-    pageTitle = <h1 className="text-black text-3xl font-medium ml-4">Email</h1>;
+    pageTitle = <h1 className="text-black text-3xl font-medium ml-4 dark:text-white">Inbox</h1>;
   } else if (pathname === "/settings") {
     pageTitle = (
       <h1 className="text-black text-3xl font-medium ml-4">Settings</h1>

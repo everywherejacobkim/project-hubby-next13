@@ -9,7 +9,7 @@ export async function GET(req: Request, res: NextResponse) {
       console.log("No session: Need login");
     }
     session && console.log("Get session", session);
-
+   
     return NextResponse.json({
       authenticated: !!session,
       data: session ? session.user : null,
