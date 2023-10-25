@@ -319,7 +319,7 @@ const DashboardNav: React.FC = () => {
                   />
                 </svg>
               )}
-              <p className="mt-1"></p>
+              <p className="mt-1">Email</p>
             </button>
           </Link>
           <Link href="/settings">

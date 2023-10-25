@@ -18,31 +18,35 @@ const ListingMail =()=>{
   const [messages, setMessages] = useState([]);
   const userId = loginUser; // Replace with the actual user ID
 
-  useEffect(() => {
-    // Fetch and set Gmail messages
-    const fetchGmailMessages = async () => {
-      try {
-        // Replace 'your_access_token_here' with the actual access token obtained via OAuth 2.0
-        const accessToken = session?.user?.accessToken;
+  const accessToken = session?.user?.accessToken;
+  console.log("Front access token" + accessToken)
 
-        const response = await axios.get(
-          `https://gmail.googleapis.com/gmail/v1/users/${userId}/messages`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
 
-        setMessages(response.data.messages);
-        console.log("gmail messsage" + messages)
-      } catch (error) {
-        console.error("Error fetching Gmail messages:", error);
-      }
-    };
+  // useEffect(() => {
+  //   // Fetch and set Gmail messages
+  //   const fetchGmailMessages = async () => {
+  //     try {
+  //       // Replace 'your_access_token_here' with the actual access token obtained via OAuth 2.0
+  //       const accessToken = session?.user?.accessToken;
+  //       console.log("Front access token" + accessToken)
+  //       const response = await axios.get(
+  //         `https://gmail.googleapis.com/gmail/v1/users/${userId}/messages`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${accessToken}`,
+  //           },
+  //         }
+  //       );
 
-    fetchGmailMessages();
-  }, [userId]);
+  //       setMessages(response.data.messages);
+  //       console.log("gmail messsage" + messages)
+  //     } catch (error) {
+  //       console.error("Error fetching Gmail messages:", error);
+  //     }
+  //   };
+
+  //   fetchGmailMessages();
+  // }, [userId]);
 
 
   return (

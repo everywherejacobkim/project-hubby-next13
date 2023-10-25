@@ -73,6 +73,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+
     async jwt({ token, user, account, session, trigger }) {
       //update session user name
       if (trigger === "update" && session?.name) {
@@ -91,7 +92,7 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
         };
       }
-
+      
       //update user in the database
       const newUser = await prisma.user.update({
         where: {
