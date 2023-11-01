@@ -3,6 +3,9 @@ import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import CurrentWeather from "../location/CurrentWeather";
 import CurrentDate from "../date/Date";
+import add from "../../../public/assets/icons/add.png"
+import Image from "next/image";
+
 
 const DashboardHeader = () => {
   const pathname = usePathname();
@@ -65,15 +68,38 @@ const DashboardHeader = () => {
             </>
           )}
         </div>
-        <div className="flex items-center space-x-4 shadow rounded-3xl py-2.5 px-7 bg-white dark:bg-neutral-box">
+        {pathname === "/email" ?
           <div>
-            <CurrentDate />
-          </div>
-          <div>
-            <CurrentWeather />
-          </div>
-        </div>
-      </div>
+           <button className="bg-primary-action rounded-lg px-4 py-2.5 text-white flex items-center justify-center">
+            <Image 
+              src={add}
+              alt="icon"
+              width={24}
+              height={20}
+              className="mx-1.5"
+            />
+           New message
+           </button>
+           
+           </div>
+           
+           : (
+             <div className="flex items-center space-x-4 shadow rounded-3xl py-2.5 px-7 bg-white dark:bg-neutral-box">
+              <div>
+                <CurrentDate />
+              </div>
+              <div>
+                <CurrentWeather />
+              </div>
+            </div>
+          )
+        }
+
+           
+            </div>
+        
+        
+        
     </header>
   );
 };

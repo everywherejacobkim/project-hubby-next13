@@ -2,9 +2,12 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import useCurrentUser from "@/lib/hooks/useCurrentUser";
-import axios from "axios";
 import Image from "next/image";
+import axios from "axios";
+import leftArrow from "../../../public/assets/images/png/left.png"
+import rightArrow from "../../../public/assets/images/png/right.png"
 import userProfile from "../../../public/assets/images/png/portrait.jpg"
+// import retry from "../../../../public/assets/images/svg/retry.svg"
 
 interface Message {
   id: string;
@@ -108,24 +111,60 @@ const MailList = () => {
     ]
 
   return (
-    <div className="bg-white p-7">
+    <div className="p-7">
+        <div>
+          {/****s */}
+          <div className="flex justify-between pb-11">
+            <div className="flex">
+              <select className="border-0 shadow-sm rounded-lg">
+                <option selected value="sort by">sort by</option>
+                <option value="all">All</option>
+                <option value="read">Read</option>
+                <option value="unread">Unread</option>
+              </select>
+              
+            </div>
+
+            <div>
+              <button className="bg-white p-2.5 rounded-md">
+                <Image 
+                  src={leftArrow}
+                  alt="refresh image"
+                  width={8}
+                  height={8}
+                />
+              </button>
+              <button className="bg-white p-2.5 ml-2.5 rounded-md">
+                <Image 
+                src={rightArrow}
+                width={8}
+                height={8}
+                alt="left arrow"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
       {/* {messages.length > 0 ? (
         messages.map((message) => <div key={message.id}>hello</div>)
       ) : (
         <div>No messages found</div>
       )} */}
       {mailLists.map((mail, index)=>
-        <div key={index} className="shadow-md flex rounded-xl mx-10 mb-4">
-          <div className="flex">
+        <div key={index} className="shadow-md flex rounded-xl  mb-4 bg-white py-7">
+          <div className="flex w-1/5">
             <Image src={mail.img} alt="mail image" width={50} height={50} />
             <h5 className="font-semibold">{mail.name}</h5>
           </div>
-          <div className=" pl-24 ">
-            <h5 className="font-semibold">{mail.title}</h5>
-            {mail.content.length > 250 ? `${mail.content.substring(0,250)}...` :
-            <p>{mail.content}</p>
+          <div className="w-3/5 ">
+            <h5 className="font-semibold text-lg">{mail.title}</h5>
+            {mail.content.length > 150 ? `${mail.content.substring(0,150)}...` :
+            <p className="text-sm">{mail.content}</p>
            }
            
+          </div>
+          <div className="1/5">
+           <p className="items-center">{mail.createdAt}</p>
           </div>
         </div>
       )}
