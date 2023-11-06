@@ -146,7 +146,7 @@ const ChatWindow = () => {
                     />
                 <h5>Hello! Ask anything</h5>
               </div>
-              {/* <Image src={ChatBotText} alt="chat-bot-text-icon" /> */}
+              {/* < src={ChatBotText} alt="chat-bot-text-icon" /> */}
             </div>
           )}
         </div>
